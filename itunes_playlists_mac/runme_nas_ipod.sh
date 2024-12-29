@@ -17,8 +17,8 @@ ipodpathstring="/Music"
 mkdir -p "$basedir"
 
 if [ ! -e "$ituneslibraryxml" ]; then
-    echo "No iTunes Library found in $ituneslibraryxml!"
-    exit
+  echo "No iTunes Library found in $ituneslibraryxml!"
+  exit
 fi
 
 # make backup of nas dir
@@ -35,7 +35,6 @@ mkdir -p "$ipodplaylistsdir"
 ./itunesexport -library "$ituneslibraryxml" -output "$nasplaylistsdir" -includeAllWithBuiltin
 cp -r "$nasplaylistsdir"/* "$ipodplaylistsdir"
 
-## python3 ./mac2nas_path.py
 # preprocess escaped versions of path strings
 localpathstring_esc=$(echo $localpathstring | sed 's_/_\\/_g')
 naspathstring_esc=$(echo $naspathstring | sed 's_/_\\/_g')
@@ -43,10 +42,9 @@ ipodpathstring_esc=$(echo $ipodpathstring | sed 's_/_\\/_g')
 
 # change to nas paths
 cd $nasplaylistsdir
-# use '|' as sed separator because the strings contain '\'; 
+# use '|' as sed separator because the strings contain '\';
 sed -i '' 's|'"$localpathstring_esc"'|'"$naspathstring_esc"'|g' *
 cd -
-#find "$nasplaylistsdir" -type f | xargs sed -i 's|${localpathstring_esc}|${naspathstring_esc}|g'
 
 # change to ipod paths
 cd $ipodplaylistsdir
@@ -55,8 +53,11 @@ cd -
 
 # cleanup playlists
 rm "$nasplaylistsdir/Tones.m3u"
+rm "$nasplaylistsdir/Downloaded.m3u"
+rm "$nasplaylistsdir/Dead Tracks.m3u"
 mv "$nasplaylistsdir/Library.m3u" "$nasplaylistsdir/Full Library.m3u"
 
 rm "$ipodplaylistsdir/Tones.m3u"
+rm "$ipodplaylistsdir/Downloaded.m3u"
+rm "$ipodplaylistsdir/Dead Tracks.m3u"
 mv "$ipodplaylistsdir/Library.m3u" "$ipodplaylistsdir/Full Library.m3u"
-
