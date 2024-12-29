@@ -11,7 +11,8 @@ ipodplaylistsdir="${basedir}/ipod_itunes_playlists"
 ipodplaylistsbackupdir="${ipodplaylistsdir}_bak"
 localpathstring="file:///Users/anirudh/Music/MusicLibrary"
 nasabspathstring="/mnt/ssd-media/media/music"
-naspathstring="../music"
+# use relative path instead of absolute
+naspathstring=".."
 ipodpathstring="/Music"
 nassync_playlistsdir=${HOME}/Music/MusicLibrary/playlists
 
