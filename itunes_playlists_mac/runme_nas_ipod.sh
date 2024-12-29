@@ -10,11 +10,14 @@ ituneslibraryxml="$basedir/Library.xml"
 ipodplaylistsdir="${basedir}/ipod_itunes_playlists"
 ipodplaylistsbackupdir="${ipodplaylistsdir}_bak"
 localpathstring="file:///Users/anirudh/Music/MusicLibrary"
-naspathstring="/mnt/ssd-media/media/music"
+nasabspathstring="/mnt/ssd-media/media/music"
+naspathstring="../music"
 ipodpathstring="/Music"
+nassync_playlistsdir=${HOME}/Music/MusicLibrary/playlists
 
 #failsafe
 mkdir -p "$basedir"
+mkdir -p "$nassync_playlistsdir"
 
 if [ ! -e "$ituneslibraryxml" ]; then
   echo "No iTunes Library found in $ituneslibraryxml!"
@@ -57,7 +60,12 @@ rm "$nasplaylistsdir/Downloaded.m3u"
 rm "$nasplaylistsdir/Dead Tracks.m3u"
 mv "$nasplaylistsdir/Library.m3u" "$nasplaylistsdir/Full Library.m3u"
 
+# cleanup ipod playlists, can't copy from nas playlists directory because paths are different
 rm "$ipodplaylistsdir/Tones.m3u"
 rm "$ipodplaylistsdir/Downloaded.m3u"
 rm "$ipodplaylistsdir/Dead Tracks.m3u"
 mv "$ipodplaylistsdir/Library.m3u" "$ipodplaylistsdir/Full Library.m3u"
+
+# copy to playlists directory that's automatically sync'd with nas
+# this playlist contains path that is relative to music direcotry instead of absolute
+cp -r "$nasplaylistsdir"/* "$nassync_playlistsdir"
