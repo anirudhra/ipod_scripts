@@ -4,7 +4,7 @@
 * foobar contains scripts to convert from Foobar to Rockbox M3U
 * iPod_Utilities contains Windows utilities for extracting album art and converting playlists from proprietory iTunes/iPod DB to Rockbox accessible ones
 * itunes_playlists_mac contains iTunes playlist management and music and playlists sync scripts for iPod and NAS/Server
-* rockbox_themes contains a snapshot of currently installed iPod Classic themes
+* rockbox contains a snapshot of currently installed iPod Classic themes and album art in BMP
 * Windows_scripts contains iPod/NAS/USB sync scripts for Windows
 
 ## iPod Music and Playlists Sync
