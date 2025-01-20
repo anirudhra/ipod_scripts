@@ -1,0 +1,128 @@
+#
+#
+#
+##    ▒█████   ███▄    █  ██▓
+##   ▒██▒  ██▒ ██ ▀█   █ ▓██▒
+##   ▒██░  ██▒▓██  ▀█ ██▒▒██▒
+##   ▒██   ██░▓██▒  ▐▌██▒░██░
+##   ░ ████▓▒░▒██░   ▓██░░██░
+##   ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ ░▓
+##     ░ ▒ ▒░ ░ ░░   ░ ▒░ ▒ ░
+##   ░ ░ ░ ▒     ░   ░ ░  ▒ ░
+##     ░ ░           ░  ░
+#
+#
+#__ONI
+#__by__CHUCK_LARDO
+#__licence__CC-BY-SA 4.0
+#__version__1.0
+#__2024
+#__target resolution 320x240
+#__tested on iPod Classic (6th Gen) and HiFi Walker H2
+#
+#__WPS File
+#
+#__Hide The Status Bar
+%wd
+#
+#__Load Backdrop
+%X(oni_backdrop_wps.bmp)
+#
+#__Preload Fonts
+%Fl(2,16-Manrope-Medium.fnt)
+%Fl(3,20-Manrope-Bold.fnt)
+%Fl(4,12-Manrope-Semibold.fnt)
+%Fl(5,14-Manrope-Regular.fnt)
+%Fl(6,18-Manrope-Medium.fnt)
+%Fl(7,14-Manrope-Medium.fnt)
+#
+#__Preload Images
+%xl(B,battery.bmp,0,0,23)
+%xl(C,pb_back.bmp,0,0)
+%xl(D,pb_dot.bmp,0,0)
+%xl(H,play_pause.bmp,0,0,3)
+%xl(I,seek.bmp,0,0,4)
+%xl(K,vol.bmp,0,0)
+%xl(M,shuffle.bmp,0,0,2)
+%xl(N,repeat.bmp,0,0,2)
+%xl(O,hold.bmp,0,0,2)
+%xl(P,volume_speaker.bmp,0,0)
+#
+#__Battery
+%V(-30,8,19,10,-)
+%?bp<%?bc<%t(.3)%xd(Ba);%t(.3)%xd(Bb)|%xd(Ba)>|%?bl<%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)|%xd(Bg)|%xd(Bh)|%xd(Bi)|%xd(Bj)|%xd(Bk)|%xd(Bl)|%xd(Bm)|%xd(Bn)|%xd(Bo)|%xd(Bp)|%xd(Bq)|%xd(Br)|%xd(Bs)|%xd(Bt)|%xd(Bu)|%xd(Bv)|%xd(Bw)>>
+#
+#__Time
+%V(120,6,80,16,4)%Vf(999997)
+#%ac%?cf<%cH:%cM|%cl:%cM> #%cP
+%ac%?cf<%cH:%cM|%cl:%cM %cP> #%cP
+#
+#__Song Title
+%V(20,38,280,24,3)%Vf(F3F1EB)
+%ac%s%?it<%s%it|%fn>
+#
+#__Artist Title
+%V(20,68,280,20,2)%Vf(-)
+%ac%s%?ia<%ia|%?d(2)<%d(2)|%Sx(Artist)>>
+#
+#__Album Title
+%V(20,86,280,20,2)%Vf(-)
+%ac%s%?id<%id|%?d(1)<%d(1)|%Sx(Album)>>
+# following 2 that try to add year, are broken
+#%ac%s%?id<%id (%iy)|%?d(1)<%d(1)|%Sx(Album)>>
+#%ac%s%?id<%id %?iy<(%iy)>|%?d(1)<%d(1)|%Sx(Album)>>
+#
+#__Song Current Time
+%V(10,119,40,15,7)%Vf(-)
+%al%pc
+#
+#__Song Remaining Time
+%V(270,119,40,15,7)%Vf(-)
+%ar -%pr
+#
+#__Progress Bar
+%V(50,122,220,15,-)
+%pb(0,0,220,15,C,slider,D)
+#
+#__Seek Back
+%V(102,160,17,14,-)
+%?mp<%xd(Ia)|%xd(Ia)|%xd(Ia)|%xd(Ia)|%xd(Ib)>
+#
+#__Play Pause
+%V(153,161,14,14,-)
+%?mp<%xd(Hc)|%xd(Ha)|%xd(Hb)|%xd(Ha)|%xd(Ha)>
+#
+#__Seek Forward
+%V(200,160,17,14,-)
+%?mp<%xd(Ic)|%xd(Ic)|%xd(Ic)|%xd(Id)|%xd(Ic)>
+#
+#__Repeat
+%V(37,159,17,16,-)
+%?mm<%xd(Na)|%xd(Nb)|%xd(Nb)|%xd(Nb)|%xd(Nb)>
+#
+#__Shuffle
+%V(266,160,17,14,-)
+%?ps<%xd(Mb)|%xd(Ma)>
+#
+#__If volume changed, display volume bar, else display track info and number
+%?mv<%Vd(volumeBar)%Vd(volumeText)|%Vd(trackInfo)%Vd(trackNumber)>
+#
+#__Track Information
+%Vl(trackInfo,0,196,-,18,5)%Vf(999997)
+%s%ac%ff KHz : %fb kbps : %?fc<MP1|MP2|MP3|AIFF|WAV|VORBIS|FLAC|MPC|A52|WAVPAC|ALAC|AAC|SHORTEN|SID|ADX|NSF|SPEEX|SPC|APE|WMA|?>
+#
+#__Song Number In Playlist
+%Vl(trackNumber,0,214,-,16,5)%Vf(999997)
+%ac Track %pp of %pe
+#
+#__Volume
+%Vl(volumeBar,25,206,238,12,0)
+%xd(P)%pv(18,5,220,2,K)
+#
+%Vl(volumeText,268,204,-,12,4)%Vf(-)
+%al%pv dB
+#
+#__Hold Icon
+%V(10,8,16,8,-)
+%?mh<%xd(Ob)|%xd(Oa)>
+#

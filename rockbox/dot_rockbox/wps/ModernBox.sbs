@@ -1,0 +1,252 @@
+# ┌──────────────────────────────────────────────────────────────────────────────┐
+# │                                                                              │
+# │ ███╗░░░███╗░█████╗░██████╗░███████╗██████╗░███╗░░██╗██████╗░░█████╗░██╗░░██╗ │
+# │ ████╗░████║██╔══██╗██╔══██╗██╔════╝██╔══██╗████╗░██║██╔══██╗██╔══██╗╚██╗██╔╝ │
+# │ ██╔████╔██║██║░░██║██║░░██║█████╗░░██████╔╝██╔██╗██║██████╦╝██║░░██║░╚███╔╝░ │
+# │ ██║╚██╔╝██║██║░░██║██║░░██║██╔══╝░░██╔══██╗██║╚████║██╔══██╗██║░░██║░██╔██╗░ │
+# │ ██║░╚═╝░██║╚█████╔╝██████╔╝███████╗██║░░██║██║░╚███║██████╦╝╚█████╔╝██╔╝╚██╗ │
+# │ ╚═╝░░░░░╚═╝░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░░╚════╝░╚═╝░░╚═╝ │
+# │                                                                              │
+# │                                                                              │
+# │                                 Rockbox Theme                                │
+# │   Rev. 0                                                  by Chris Bagnell   │
+# │   2023-12-02                                                      CC-BY-SA   │
+# │                     https://www.youtube.com/@chrisbagnell                    │
+# │                                                                              │
+# │                                   SBS File                                   │
+# │                                                                              │
+# │   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓   │
+# │   ┃                                                                      ┃   │
+# │   ┃        Designed for and tested with iPod Classic 6th Gen             ┃   │
+# │   ┃                                                                      ┃   │
+# │   ┃              Loosely based on Interpod and iVideo                    ┃   │
+# │   ┃                                                                      ┃   │
+# │   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛   │
+# │                                                                              │
+# │                                                                              │
+# │    Revision History:                                                         │
+# │                                                                              │
+# │    Rev. 0 (2023-12-02):                                                      │
+# │      - Initial Release                                                       │
+# │                                                                              │
+# │                                                                              │
+# └──────────────────────────────────────────────────────────────────────────────┘
+#
+#
+#	Load needed fonts
+%Fl(3,15-Inter-Bold.fnt)
+%Fl(5,16-Inter-SemiBold.fnt)
+%Fl(9,16-Inter-V.fnt)
+#
+#	Preload icons
+%xl(P,playerStatus.bmp,0,0,4)
+%xl(A,holdSlider.bmp,0,0,2)
+%xl(S,sleep.bmp,0,0)
+%xl(L,busyIndicator.bmp,0,0,16)
+%xl(D,batteryStatus.bmp,0,0,25)
+%xl(M,usbBackdrop.bmp,0,0)
+#
+#
+#
+#
+# ---------
+# Logic:
+# ---------
+#
+# 	Display bar on bottom with album art, track info or volume indicator as necessary
+%?mp<%Vd(bottombarsmall)%?mv(1.2)<%Vd(volumebottombarsmall)|%Vd(filledbottombarsmall)>|%Vd(bottombar)%?mv(1.2)<%?C<%Vd(albumart)>%Vd(volume)|%?C<%Vd(albumart)%Vd(currenttrack)|%Vd(currenttrackshiftedleft)>>>
+#
+# 	Set up UI Viewport 
+# 	Use larger viewport if nothing is playing
+%?mp<%VI(mainlarge)|%VI(main)>
+#
+#	Display battery percentage
+#	Show busy indicator (on the left or right, depending on whether battery percentage is displayed)
+%?if(%St(battery display), =, numeric)<%?lh<%Vd(busyindicatorleft)>%Vd(title)%Vd(batterytext)|%Vd(titlewide)%?lh<%Vd(busyindicator)>>
+#
+#	Display lock icon if hold slider is engaged
+%?mh<%Vd(lock)|%Vd(unlocked)>
+#
+#
+#	Sleep Timer Icon
+%?bs<%Vd(sleeptimericon)>
+#
+#
+# ---------
+# Viewports:
+# ---------
+#
+%V(0,0,-,26,-)
+%Vf(b8b9bb)
+%Vb(b8b9bb)
+%dr(0,24,-,1,3e4042)
+%dr(0,25,-,1,3e4042)
+#
+#
+# 	Title bar text, centered, at the top 
+#
+# 	Scrolling, displays centered
+#
+# 	(Current screen (cs) values:)
+#
+# 		1 Menus
+#		2 WPS
+#	 	3 Recording screen
+#	 	4 FM Radio screen
+#	 	5 Current Playlist screen
+#	 	6 Settings menus
+#	 	7 File browser
+#	 	8 Database browser
+#	 	9 Plugin browser
+#	 	10 Quickscreen
+#	 	11 Pitchscreen
+#	 	12 Setting chooser
+#	 	13 Playlist Catalogue Viewer
+#	 	14 Plugin
+#	 	15 Context menu
+#	 	16 System Info screen
+#	 	17 Time and Date Screen
+#	 	18 Bookmark browser
+#	 	19 Shortcuts menu
+#	 	20 Track Info screen
+#
+%Vl(title,74,5,-74,17,3)
+%Vf(b8b9bb)
+%Vb(b8b9bb)
+%s%ac%?cs<iPod||Recording|FM Radio|%Lt|%Lt|%Lt|%Lt|%Lt|%?cf<%cH:%cM|%cl:%cM %cP>|%Lt|%Lt|%Lt|%Lt|%?if(%Lt, =,Context Menu)<Perform Action...|%Lt>|%Lt|%Lt|%Lt|%Lt|%Lt|iPod>
+#
+#
+# Title bar text - when battery percentage is not displayed
+# Menu when Now Playing is on bottom of screen
+#
+%Vl(titlewide,56,5,-56,17,3)
+%Vf(b8b9bb) 
+%Vb(b8b9bb)
+%s%ac%?cs<iPod||Recording|FM Radio|%Lt|%Lt|%Lt|%Lt|%Lt|%?cf<%cH:%cM|%cl:%cM %cP> - %?if(%bl, =, 100)<CGD|%bl%%>|%Lt|%Lt|%Lt|%Lt|%?if(%Lt, =,Context Menu)<Perform Action...|%Lt>|%Lt|%Lt|%Lt|%Lt|%Lt|iPod>
+#
+#	Smaller viewport to make room for larger bar on bottom IPOD at top of screen
+%Vi(main,2,27,-2,-37,-)
+%Vf(b8b9bb)
+%Vb(3e4042)
+#
+#	Larger Viewport if nothing is playing
+%Vi(mainlarge,2,27,-2,-12,-)
+%Vf(b8b9bb)
+%Vb(3e4042)
+#
+#
+#	USB screen
+%?if(%cs, =, 21)<%xd(M)>
+#
+#
+# 	Hold Slider Icon, to the right of the player status icon
+%Vl(lock,24,7,9,12,-)
+%Vb(b8b9bb)
+%xd(Ab)
+#
+#	Unlocked Hold slider
+%Vl(unlocked,24,7,9,12,-)
+%Vb(b8b9bb)
+#
+#	Battery percentage
+#%Vl(batterytext,260,6,26,12,3)
+#%Vf(b8b9bb)
+#%Vb(b8b9bb)
+#%?if(%bl, =, 100)<CGD|%bl %%>
+#
+#	Sleep Timer icon
+%Vl(sleeptimericon,42,7,9,12,-)
+%Vb(b8b9bb)
+%xd(S)
+#
+#
+# 	Player Status Icon, in upper left corner
+%V(3,5,15,16,-)
+%Vf(b8b9bb)
+%Vb(b8b9bb)
+# 	Display appropriate icon (P) for the current state
+#
+# 	Player Status:
+#		Stop, 
+#		Play, 
+#		Pause, 
+#		Fast Forward, 
+#		Rewind, 
+#		Recording, 
+#		Recording paused, 
+#		FM Radio playing, 
+#		FM Radio muted                                       
+%?mp<|%xd(Pa)|%xd(Pb)|%xd(Pc)|%xd(Pd)|>
+#
+#
+# 	Battery Icon in upper right corner
+%V(-32,6,26,16,3)
+%Vf(b8b9bb)
+%Vb(b8b9bb)
+%?bp<%?bc<%t(1.0)%xd(Da);%t(1.0)%xd(Db)|%xd(Dc)>|%?bl<%xd(Dd)|%xd(Dd)|%xd(De)|%xd(Df)|%xd(Dg)|%xd(Dh)|%xd(Di)|%xd(Dj)|%xd(Dk)|%xd(Dl)|%xd(Dm)|%xd(Dn)|%xd(Do)|%xd(Dp)|%xd(Dq)|%xd(Dr)|%xd(Ds)|%xd(Dt)|%xd(Du)|%xd(Dv)|%xd(Dw)|%xd(Dx)|%xd(Dy)>>
+#
+#
+%Vl(busyindicator,-50,9,9,9,-)
+%Vb(b8b9bb)
+%t(0.1)%xd(La);%t(0.1)%xd(Lb);%t(0.1)%xd(Lc);%t(0.1)%xd(Ld);%t(0.1)%xd(Le);%t(0.1)%xd(Lf);%t(0.1)%xd(Lg);%t(0.1)%xd(Lh);%t(0.1)%xd(Li);%t(0.1)%xd(Lj);%t(0.1)%xd(Lk);%t(0.1)%xd(Ll);%t(0.1)%xd(Lm);%t(0.1)%xd(Ln);%t(0.1)%xd(Lo);%t(0.1)%xd(Lp)
+#
+%Vl(busyindicatorleft,58,9,9,9,-)
+%Vb(b8b9bb)
+%t(0.1)%xd(La);%t(0.1)%xd(Lb);%t(0.1)%xd(Lc);%t(0.1)%xd(Ld);%t(0.1)%xd(Le);%t(0.1)%xd(Lf);%t(0.1)%xd(Lg);%t(0.1)%xd(Lh);%t(0.1)%xd(Li);%t(0.1)%xd(Lj);%t(0.1)%xd(Lk);%t(0.1)%xd(Ll);%t(0.1)%xd(Lm);%t(0.1)%xd(Ln);%t(0.1)%xd(Lo);%t(0.1)%xd(Lp)
+#
+#
+# -----------  Bar on bottom -----------
+# -----------  of screen   -------------
+# --------------------------------------
+#
+%Vl(bottombar,0,-36,-,-,-)
+%Vf(b8b9bb)
+%Vb(b8b9bb)
+#
+%dr(0,0,-,1,6c6e70)
+%dr(0,1,-,1,6c6e70)
+#
+%Vl(bottombarsmall,0,-11,-,-,-)
+%Vf(b8b9bb)
+%Vb(b8b9bb)
+#
+%dr(0,0,-,1,3e4042)
+%dr(0,1,-,1,3e4042)
+#
+#
+# 	Album Art
+%Vl(albumart,8,-33,30,30,-)
+%Vf(b8b9bb)
+%Vb(ebeeee)
+%Cl(0,0,30,30)
+%Vf(b8b9bb)
+%Vb(b8b9bb)
+%Cd
+#
+#	Current Track
+%Vl(currenttrack,48,-26,-5,-,5)
+%Vf(fcfcfc)
+%Vb(b8b9bb)
+%s%al%?it<%it|%fn>
+#
+#	Current Track shifted left
+%Vl(currenttrackshiftedleft,7,-26,-5,-,5)
+%Vf(fcfcfc)
+%Vb(b8b9bb)
+%s%al%?it<%it|%fn>
+#
+# --------------------------------------
+# --------   Volume Indicators   -------
+# --------------------------------------
+#
+%Vl(volume,58,-17,-58,2,-)
+%Vf(-)
+%pv(0,0,-,2,noborder)
+#
+%Vl(volumebottombarsmall,58,-6,-58,2,-)
+%Vf(-)
+%pv(0,0,-,2,noborder)
+#
+%Vl(filledbottombarsmall,58,-6,-58,2,-)
+%Vf(b8b9bb)
+%Vb(b8b9bb)

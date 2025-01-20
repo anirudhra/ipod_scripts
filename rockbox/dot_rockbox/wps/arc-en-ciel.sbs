@@ -1,0 +1,141 @@
+# Rockbox Theme Name: arc-en-ciel
+# Platform: Cowon D2 (320x240x24)
+# Author: Simon Rothen (rothen@gmx.net)
+# Licencing: CC-BY-SA 3.0
+# faenza Iconset: icons for Gnome by Matthieu James under GPL. 8bit alpha
+# Battery, Repeat, Shuffle and Reception Icons derived from Gnome-Shell High Contrast Icons
+#
+# Version: 1.7
+# Date: 2015-09-16
+# Changelog: see CFG file
+#
+# SBS File
+#
+# Additional Fonts
+%Fl(3,14-Ubuntu-R.fnt)
+%Fl(4,14-Ubuntu-B.fnt)
+%Fl(6,12-Ubuntu-R.fnt)
+%Fl(7,19-Ubuntu-B.fnt)
+
+
+
+### TOUCHSCREEN AREAS
+
+# Menu
+%T(100,0,120,30,menu)
+
+# Quickscreen
+%T(0,0,72,30,quickscreen)
+
+# Contextmenu
+%T(244,0,76,30,contextmenu)
+
+# Cancel
+%T(cancel,83,198,56,42,cancel)
+
+# Resume (Go to WPS)
+%T(0,198,64,42,resumeplayback)
+
+# Select + Contextmenu
+%T(select,199,198,51,42,select)
+%T(199,198,51,42,contextmenu,long_press)
+
+# Menu Down
+%T(261,198,46,42,next,repeat_press)
+%T(down,261,198,46,42,next)
+
+# Menu Up
+%T(148,198,46,42,prev,repeat_press)
+%T(up,148,198,46,42,prev)
+
+
+
+### VIEWPORTS
+
+
+## Vi AREA (MENU)
+%Vi(-,10,32,300,160,-)
+
+
+## Conditional: Album Art present?(a|n)
+%?C<%Vd(a)|%Vd(n)>
+
+
+## Conditional: Touchscreen present?(t|k)
+%vs(target_has_touchscreen, set, 2)> 
+%?if(%vg(target_has_touchscreen), =, 2)<%Vd(t)|%Vd(k)>
+
+
+## Conditional : RTC present?(c|o), 12h?(r)
+%?if(%ck,!=,%cp)<%?cf<%Vd(c)|%Vd(r)>|%Vd(o)> 
+
+# Title
+%xl(t,faenza_14x14x32.bmp,0,0,32)
+%V(6,3,14,14,-)
+%?Li<|%xd(ta)|%xd(tb)|%xd(tc)|%xd(td)|%xd(te)|%xd(tf)|%xd(tg)|%xd(th)|%xd(ti)|%xd(tj)|%xd(tk)|%xd(tl)|%xd(tm)|%xd(tn)|%xd(to)|%xd(tp)|%xd(tq)|%xd(tr)|%xd(ts)|%xd(tt)|%xd(tu)|%xd(tv)|%xd(tw)|%xd(tx)|%xd(ty)|%xd(tz)|%xd(tA)|%xd(tB)|%xd(tC)|%xd(tD)|%xd(tE)|%xd(tF)>
+%Vl(c,24,2,205,17,7)%Vf(EEEEEE)
+%Lt
+%Vl(r,24,2,187,17,7)%Vf(EEEEEE)
+%Lt
+%Vl(o,24,2,244,17,7)%Vf(EEEEEE)
+%Lt
+
+# Clock & Battery
+%Vl(c,230,5,72,12,4)%Vf(EEEEEE)
+%ar%ck:%cM   %bl%%
+%Vl(r,211,5,91,12,4)%Vf(EEEEEE)
+%ar%cl:%cM %cp  %bl%%
+%Vl(o,269,5,33,12,4)%Vf(EEEEEE)
+%ar%bl%%
+%xl(g,bat.bmp,0,0,8)
+%V(302,1,16,16,-)
+%?bp<%?bl<|%xd(gh)|%xd(gg)|%xd(gf)|%xd(ge)|%xd(ge)>|%?bl<|%xd(gd)|%xd(gc)|%xd(gb)|%xd(gb)|%xd(ga)|%xd(ga)>>
+
+# Color Bar
+%xl(r,pb_2.bmp,0,0)
+%xl(v,pb_9.bmp,0,0)
+%V(1,20,318,5,-)
+%?cs<%x(p, pb_rainbow.bmp,0,0)||%xd(r)||%pb(0,0,-,-,pb_4.bmp)|%x(p1,pb_1.bmp,0,0)|%x(p3,pb_3.bmp,0,0)|%x(p7,pb_7.bmp,0,0)|%xd(v)|%x(p6,pb_6.bmp,0,0)|%xd(v)|%xd(r)|%x(p10,pb_10.bmp,0,0)|%x(p5,pb_5.bmp,0,0)|%x(p8,pb_8.bmp,0,0)|%xd(r)|%xd(v)>
+
+
+## Bottom Bar
+
+# Album Art
+%Vl(a,0,198,42,42,-)
+%dr(4,4,34,34,18181818)
+%Cl(4,4,34,34)
+%Cd
+
+# Play, Pause
+%xl(m,play_state.bmp,0,0,3)
+%V(42,205,10,10,-)
+%?mp<|%xd(mb)|%xd(mc)|>
+#%V(43,220,270,1,-)
+#%pb(0,0,-,-,pb_grey.bmp)
+
+# Title
+%Vl(t,42,223,50,12,6)%Vf(EEEEEE)
+%s%?it<%it>
+%Vl(k,60,204,253,16,1)%Vf(EEEEEE)
+%s%ar%?it<%it>
+%Vl(k,60,222,253,14,3)%Vf(EEEEEE)
+%s%ar%?ia<%ia>
+
+
+## Touchscreen Buttons and Feedback
+
+%Vl(t,90,198,230,42,-)
+%xl(e,escape.bmp,16,9)
+%xl(u,up.bmp,65,11)
+%xl(s,select.bmp,123,9)
+%xl(d,down.bmp,175,11)
+#%xd(e)%xd(u)%xd(s)%xd(d)
+# Hide controls that cannot be used in the current menu screen (main manu, quickscreen, pitchscreen)
+%?cs<%xd(u)%xd(s)%xd(d)||%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)||%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)|%xd(e)%xd(u)%xd(s)%xd(d)>
+
+# Touchschscreen Button Feedback
+%?Tl(cancel, 0.1)<%dr(0,0,50,5,EEEEEE)|%dr(0,0,50,5,181818)>
+%?Tl(up, 0.1)<%dr(55,0,50,5,EEEEEE)|%dr(55,0,50,5,181818)>
+%?Tl(select, 0.1)<%dr(110,0,50,5,EEEEEE)|%dr(110,0,50,5,181818)>
+%?Tl(down, 0.1)<%dr(165,0,50,5,EEEEEE)|%dr(165,0,50,5,181818)>
+

@@ -1,0 +1,67 @@
+#######################################
+## THEME NAME: DIGITAL
+## BY: TBX1024 (AT) GMAIL (DOT) COM
+## PLATFORM: IPOD CLASSIC (IPOD 6G/6.5G/7G) (320*240)
+## VERSION: 1.0
+## Sat Mar 15 10:54:44 CET 2014
+## License: Creative Commons Attribution-Share Alike 3.0 
+## (http://creativecommons.org/licenses/by-sa/3.0/)
+########################################
+## ORIGINAL THEME:
+## THEME NAME: MINIMAL RETRO
+## BY: SDENT64 (AT) HOTMAIL (DOT) COM
+## PLATFORM: SANSA FUZE V2 (220x176x16)
+## VERSION: 0.1
+#######################################
+#### SBS FILE ########################
+
+## DISABLE STATUS BAR
+%wd
+#STATUS BAR BACKGROUND
+%V(0,0,-,26,-)%Vb(000000) 
+	
+## PLAYACK MODE
+%xl(B,status_mode.bmp,0,0,4)
+%V(5,1,14,12,0)%Vb(000000)
+%al%?mp<|%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)>
+
+### HOLD
+##%xl(G,hold.bmp,0,0,2)
+##%V(5,1,14,12,0)%Vb(000000)
+##%?mh<%xd(Ga)|%xd(Gb)>
+
+## MENU INFO
+%V(25,0,150,15,1)%Vb(000000)%Vf(BDBDBD)
+%Lt
+
+## VOLUME TEXT
+%V(140,0,50,15,1)%Vf(33b5e5)%Vb(000000) 
+%ar%pvdB  
+## VOLUME WARNING ICON
+%V(185,3,20,18,0)%Vb(000000) 
+%xl(C,volumewarning.bmp,0,0,10)
+%?pv<|%xd(Ca)|%xd(Cb)|%xd(Cc)|%xd(Cd)|%xd(Ce)|%xd(Cf)|%xd(Cg)|%xd(Ch)|%xd(Ci)|%xd(Cj)>
+
+## CLOCK
+%V(260,0,60,15,1)%Vf(33b5e5)%Vb(000000)
+%ac%?cf<%cH:%cM|%cl:%cM>
+
+## BATTERY ICON
+%xl(H,battery_level.bmp,0,0,12)
+%V(245,1,20,14,0)%Vb(000000)
+%?bp<%?bc<%xd(Hl)|%xd(Hl)>|%?bl<|%xd(Ha)|%xd(Hb)|%xd(Hc)|%xd(Hd)|%xd(He)|%xd(Hf)|%xd(Hg)|%xd(Hh)|%xd(Hi)|%xd(Hj)|%xd(Hk)>>
+## BATTERY TEXT
+%V(205,0,35,15,1)%Vb(000000)%Vf(33b5e5)
+%ar%bl%%
+
+## MAIN PANEL
+%Vi(-,0,16,-,195,1)%Vf(33b5e5)%Vb(1D1D1D)
+%?mp<|%Vd(e)|%Vd(f)|||%Vd(g)|%Vd(h)|%Vd(i)|%Vd(j)>%Vf(BDBDBD)
+
+## NOW PLAYING
+%V(0,210,-,-,1)%Vf(33b5e5)%Vb(000000)
+%alNow Playing:
+%Vl(e,10,225,290,-,1)%Vf(BDBDBD)%Vb(000000)
+%al%s%?ia<%ia|%?iA<%iA|%?d(2)<%d(2)|%Sx(Unknown)>>> - %?it<%it|%fn>
+
+

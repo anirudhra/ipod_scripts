@@ -1,0 +1,382 @@
+######################################################################################################################
+# THEME       : InfoMatrix_U                                                                                         #
+# Version     : 2.0 (## ### ####)                                                                                    #
+# TARGET(S)   : Apple iPod Video / Classic (Originally for iPod Nano 1G / 2G)                                        #
+# AUTHOR      : yuuiko (Forum Name)  - Contact: (yyuuiko@icloud.com)                                                 #
+# LICENSE     : CC-BY-SA                                                                                             #
+# COPYRIGHT   : ©c.yu (yuuiko) (2020)                                                                                #
+######################################################################################################################
+#
+#-- Status Bar Disabler
+#%wd
+#
+#-- Title Bar Disabler
+%?Lt<|>
+#
+#-- Preloaded Images
+%xl(A,Battery Icons.bmp,0,0,18)
+%xl(B,Disk Access Icons.bmp,0,0,7)
+%xl(C,Hold Icon.bmp,0,0,2)
+%xl(D,PlayStatus Icons.bmp,0,0,9)
+%xl(E,Shuffle Icon.bmp,0,0,2)
+%xl(F,Repeat Icons.bmp,0,0,5)
+%xl(G,Volume Icons.bmp,0,0,14)
+%xl(H,reccnr.bmp,0,0)
+%xl(I,recmenu.bmp,0,0)
+%xl(J,recplay.bmp,0,0)
+%xl(K,recffwd.bmp,0,0)
+%xl(M,recrwd.bmp,0,0)
+%xl(N,HomeArt.bmp,0,0,2)
+%xl(O,usb.bmp,0,0,3)
+%xl(Q,usb2.bmp,0,0,3)
+%xl(P,quickcentre.bmp,0,0)
+#
+#-- PreLoad Fonts
+%Fl(2,14-Rockbox-Mix.fnt)
+%Fl(3,60-SF-Pro-Display-Regular.fnt)
+#
+#- DRAW UI------------------------------------------------------------------------------------------------------------
+#
+#-HOME UI LINES
+%Vl(M,0,0,160,240,-)%Vf(ffffff)#refresh
+%Vl(M,22,22,137,200,-)%Vf(ffffff)
+
+
+
+
+
+
+
+scroll the
+clickwheel.
+%Vl(M,17,17,146,1,-)%Vf(ffffff)#lt
+%dr(0,0,-,-)
+%Vl(M,17,224,146,1,-)%Vf(ffffff)#lb
+%dr(0,0,-,-)
+%Vl(M,17,17,1,208,-)%Vf(ffffff)#ll
+%dr(0,0,-,-)
+%Vl(M,163,17,1,208,-)%Vf(ffffff)#lr
+%dr(0,0,-,-)
+%Vl(Mu,179,224,56,1,-)%Vf(ffffff)#blb
+%dr(0,0,-,-)
+%Vl(Mu,249,224,56,1,-)%Vf(ffffff)#brb
+%dr(0,0,-,-)
+%Vl(Mu,179,169,56,1,-)%Vf(ffffff)#blt
+%dr(0,0,-,-)
+%Vl(Mu,249,169,56,1,-)%Vf(ffffff)#brt
+%dr(0,0,-,-)
+%Vl(Mu,179,169,1,55,-)%Vf(ffffff)#bll
+%dr(0,0,-,-)
+%Vl(Mu,234,169,1,55,-)%Vf(ffffff)#blr
+%dr(0,0,-,-)
+%Vl(Mu,249,169,1,55,-)%Vf(ffffff)#brl
+%dr(0,0,-,-)
+%Vl(Mu,304,169,1,55,-)%Vf(ffffff)#brr
+%dr(0,0,-,-)
+%Vl(M,179,147,56,1,-)%Vf(ffffff)#mlb
+%dr(0,0,-,-)
+%Vl(M,249,147,56,1,-)%Vf(ffffff)#mrb
+%dr(0,0,-,-)
+%Vl(M,179,92,56,1,-)%Vf(ffffff)#mlt
+%dr(0,0,-,-)
+%Vl(M,249,92,56,1,-)%Vf(ffffff)#mrt
+%dr(0,0,-,-)
+%Vl(M,179,92,1,55,-)%Vf(ffffff)#mll
+%dr(0,0,-,-)
+%Vl(M,234,92,1,55,-)%Vf(ffffff)#mlr
+%dr(0,0,-,-)
+%Vl(M,249,92,1,55,-)%Vf(ffffff)#mrl
+%dr(0,0,-,-)
+%Vl(M,304,92,1,55,-)%Vf(ffffff)#mrr
+%dr(0,0,-,-)
+%Vl(M,179,72,126,1,-)%Vf(ffffff)#tb
+%dr(0,0,-,-)
+%Vl(M,179,17,126,1,-)%Vf(ffffff)#tt
+%dr(0,0,-,-)
+%Vl(M,179,17,1,55,-)%Vf(ffffff)#tl
+%dr(0,0,-,-)
+%Vl(M,304,17,1,55,-)%Vf(ffffff)#tr
+%dr(0,0,-,-)
+#
+%Vl(M,180,36,124,21,-)%Vf(ffffff)#ttime
+%ac%ca    %?cf<%cH:%cM|%cl:%cM>
+#
+%Vl(Mu,252,172,50,50,-)%Vf(ffffff)#brart
+%Cl(0,0,50,50)
+%?mp<%xd(Nb)|%?C<%Cd|%xd(Na)>>
+#
+%Vl(M,184,95,46,21,-)%Vf(ffffff)#mldate
+%cb
+%Vl(M,184,125,46,21,-)%Vf(ffffff)#mlday
+%ar%ce
+%Vl(M,254,125,46,21,-)%Vf(ffffff)#mrbatt
+%ar%bl%%
+%Vl(M,256,99,16,16,-)%Vf(ffffff)#mrbi
+%?bp<%?bc<%t(1.0)%xd(Ab);%t(1.0)%xd(Ac)|%xd(Ad)>|%?bl<%xd(Ae)|%xd(Af)|%xd(Ag)|%xd(Ah)|%xd(Ai)|%xd(Aj)|%xd(Ak)|%xd(Al)|%xd(Am)|%xd(An)|%xd(Ao)|%xd(Ap)|%xd(Aq)|%xd(Ar)>>
+%Vl(Mu,186,176,16,16,-)%Vf(ffffff)#bltli
+%?mp<%xd(Dc)|%xd(Da)|%xd(Db)|%xd(Dd)|%xd(De)|%xd(Df)|%xd(Dg)|%xd(Dh)|%xd(Di)>
+%Vl(Mu,212,176,16,16,-)%Vf(ffffff)#bltri
+%?pv<%xd(Ga)|%xd(Gb)|%xd(Gc)|%xd(Gd)|%xd(Ge)|%xd(Gf)|%xd(Gg)|%xd(Gh)|%xd(Gi)|%xd(Gj)|%xd(Gk)|%xd(Gl)|%xd(Gm)|%xd(Gn)>
+%Vl(Mu,186,202,16,16,-)%Vf(ffffff)#blbli
+%?ps<%xd(Ea)|%xd(Eb)>
+%Vl(Mu,212,202,16,16,-)%Vf(ffffff)#blbri
+%?mm<%xd(Fe)|%xd(Fa)|%xd(Fb)|%xd(Fc)|%xd(Fd)>
+#
+#-MAIN UI LINES
+%Vl(h,0,23,247,1,-)%Vf(ffffff)#topleft
+%dr(0,0,-,-)
+%Vl(h,254,23,66,1,-)%Vf(ffffff)#topright
+%dr(0,0,-,-)
+%Vl(h,0,217,247,1,-)%Vf(ffffff)#btmleft
+%dr(0,0,-,-)
+%Vl(h,254,217,66,1,-)%Vf(ffffff)#btmright
+%dr(0,0,-,-)
+#
+#-INIT CONTEXT (C)
+%Vl(C,45,41,1,160,-)%Vf(ffffff)#BL
+%dr(0,0,-,-)
+%Vl(C,270,41,1,160,-)%Vf(ffffff)#BR
+%dr(0,0,-,-)
+%Vl(C,45,40,226,1,-)%Vf(ffffff)#BT
+%dr(0,0,-,-)
+%Vl(C,45,201,226,1,-)%Vf(ffffff)#BB
+%dr(0,0,-,-)
+%Vl(C,49,202,225,3,-)%Vf(ffffff)#SB
+%dr(0,0,-,-)
+%Vl(C,271,45,3,157,-)%Vf(ffffff)#SR
+%dr(0,0,-,-)
+%Vl(C,45,62,7,1,-)%Vf(ffffff)#T1
+%dr(0,0,-,-)
+%Vl(C,60,62,210,1,-)%Vf(ffffff)#T2
+%dr(0,0,-,-)
+#
+#-INIT USB (U)
+%Vl(U,0,0,160,240,-)%Vf(ffffff)#refresh
+%Vl(U,17,169,147,1,-)%Vf(ffffff)#lt
+%dr(0,0,-,-)
+%Vl(U,17,224,147,1,-)%Vf(ffffff)#lb
+%dr(0,0,-,-)
+%Vl(U,17,169,1,55,-)%Vf(ffffff)#ll
+%dr(0,0,-,-)
+%Vl(U,163,169,1,55,-)%Vf(ffffff)#lr
+%dr(0,0,-,-)
+#
+%Vl(U,25,177,16,16,-)%Vf(ffffff)#mrbi
+%?bp<%?bc<%t(1.0)%xd(Ab);%t(1.0)%xd(Ac)|%xd(Ad)>|%?bl<%xd(Ae)|%xd(Af)|%xd(Ag)|%xd(Ah)|%xd(Ai)|%xd(Aj)|%xd(Ak)|%xd(Al)|%xd(Am)|%xd(An)|%xd(Ao)|%xd(Ap)|%xd(Aq)|%xd(Ar)>>
+%Vl(U,46,175,110,21,-)%Vf(ffffff)#mrbatt
+%al%bl%% %bvv
+%Vl(U,141,202,16,16,-)%Vf(ffffff)
+%?lh<%t(0.1)%xd(Ba);%t(0.1)%xd(Bb);%t(0.1)%xd(Bc);%t(0.1)%xd(Bd);%t(0.1)%xd(Be);%t(0.1)%xd(Bf)|%?mh<%xd(Ca)|%xd(Bg)>>
+%Vl(U,25,198,110,21,-)%Vf(ffffff)#mrbatt2
+%al%bt
+#
+%Vl(U,17,17,146,1,-)%Vf(ffffff)#lt
+%dr(0,0,-,-)
+%Vl(U,17,153,146,1,-)%Vf(ffffff)#lb
+%dr(0,0,-,-)
+%Vl(U,17,17,1,137,-)%Vf(ffffff)#ll
+%dr(0,0,-,-)
+%Vl(U,163,17,1,137,-)%Vf(ffffff)#lr
+%dr(0,0,-,-)
+#
+%Vl(U,28,22,131,60,3)%Vf(ffffff)
+%?cf<%cH:%cM|%cl:%cM>
+%Vl(U,28,104,127,41,-)%Vf(ffffff)
+%al%?cu<Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday>
+%ce %?cm<January|February|March|April|May|June|July|August|September|October|November|December>
+#
+%Vl(Uu,179,17,126,210,-)%Vf(ffffff)
+%t(3)%xd(Oa);%t(15)%xd(Ob);%t(3)%xd(Oc);%t(3)%xd(Qa);%t(3)%xd(Qb);%t(20)%xd(Qc);%t(5)%xd(Oa);
+#
+#-INIT QUICK
+#
+%Vl(Q,0,105,37,1,-)%Vf(ffffff)#lt
+%dr(0,0,-,-)
+%Vl(Q,0,158,37,1,-)%Vf(ffffff)#lb
+%dr(0,0,-,-)
+%Vl(Q,0,106,5,52,-)%Vf(ffffff)#lr
+%dr(1,0,1,-)
+%dr(4,0,1,-)
+%Vl(Q,284,105,36,1,-)%Vf(ffffff)#rt
+%dr(0,0,-,-)
+%Vl(Q,284,158,36,1,-)%Vf(ffffff)#rb
+%dr(0,0,-,-)
+%Vl(Q,315,106,5,52,-)%Vf(ffffff)#rr
+%dr(0,0,1,-)
+%dr(3,0,1,-)
+#
+%Vl(Q,0,22,320,1,-)%Vf(ffffff)#bt
+%dr(0,0,-,-)
+%Vl(Q,38,239,244,1,-)%Vf(ffffff)#bb
+%dr(0,0,-,-)
+%Vl(Q,38,23,1,217,-)%Vf(ffffff)#bl
+%dr(0,0,-,-)
+%Vl(Q,282,23,1,217,-)%Vf(ffffff)#br
+%dr(0,0,-,-)
+%Vl(Q,111,85,98,98,-)%Vf(ffffff)
+%xd(P)
+#
+%Vl(Q,248,2,50,19,-)%Vf(ffffff)#-clock
+%?if(%cs, !=, 14)<%ar%t(4)%?cf<%cH:%cM|%cl:%cM>;%t(4)%ar%bl%%>
+#
+%Vl(Q,301,3,16,16,-)%Vf(ffffff)#-batt
+%?bp<%?bc<%t(1.0)%xd(Ab);%t(1.0)%xd(Ac)|%xd(Ad)>|%?bl<%xd(Ae)|%xd(Af)|%xd(Ag)|%xd(Ah)|%xd(Ai)|%xd(Aj)|%xd(Ak)|%xd(Al)|%xd(Am)|%xd(An)|%xd(Ao)|%xd(Ap)|%xd(Aq)|%xd(Ar)>>
+#
+%Vl(Q,17,123,16,16,-)%Vf(ffffff)#-sfl
+%?ps<%xd(Ea)|%xd(Eb)>
+%Vl(Q,287,123,16,16,-)%Vf(ffffff)#-rpt
+%?mm<%xd(Fe)|%xd(Fa)|%xd(Fb)|%xd(Fc)|%xd(Fd)>
+#
+#-- INIT UI VIEWPORTS
+#Preload
+%Vi(M,22,22,137,200,-)%Vf(ffffff)# MAIN
+%Vi(x,0,26,319,190,-)%Vf(ffffff)# Menus
+%Vi(y,39,31,243,204,-)%Vf(ffffff)# Quick
+%Vi(z,47,64,222,136,-)%Vf(ffffff)# Context
+%Vi(r,0,25,319,178,-)%Vf(ffffff)# Record
+%Vi(u,0,0,1,1,-)%Vf(000000)# USB
+#
+#-Display
+%?if(%cs, !=, 1)<%VI(x)> #Not Home
+%?if(%cs, !=, 10)<%VI(x)> #Not QuickMenu
+%?if(%cs, !=, 15)<%VI(x)> #Not ContextMenu
+%?if(%cs, !=, 3)<%VI(x)> #Not Recording
+%?if(%cs, !=, 21)<%VI(x)> #Not USB
+#
+%?if(%cs, =, 1)<%?mh<%VI(u)%Vd(U)%Vd(Mu)|%VI(M)%Vd(M)%Vd(Mu)>> #Home
+%?if(%cs, =, 10)<%VI(y)%Vd(Q)> #QuickMenu
+%?if(%cs, =, 15)<%VI(z)%Vd(C)> #ContextMenu
+%?if(%cs, =, 3)<%VI(r)%Vd(r)> #Recording
+%?if(%cs, =, 21)<%VI(u)%Vd(U)%Vd(Uu)> #USB
+#
+#---------------------------------------------------------------------------------------------------------------------
+#
+# Handler - Shift Menu Title on Icon
+%?if(%cs, !=, 1)<%?if(%cs, !=, 14)<%?if(%cs, !=, 15)<%?if(%cs, !=, 21)<%?mh<%Vd(b)%Vd(d)|%?lh<%Vd(b)%Vd(c)|%Vd(a)>>>>>># !plugin
+%?if(%cs, =, 14)<%?if(cs, !=, 15)<%?mh<%Vd(g)%Vd(d)|%?lh<%Vd(g)%Vd(c)|%Vd(f)>>>>#   -plugin menu
+#
+# Handler - Toggle Context Menu Title
+%?if(%cs, =, 15)<%Vd(e)> #Context
+#
+# Handler - Disable UI for specialty screens
+%?if(%cs, !=, 1)<%?if(%cs, !=, 15)<%?if(%cs, !=, 21)<%?if(%cs, !=, 10)<%Vd(h)>>>>
+#
+#
+#--TOP BAR LEFT-----------------------------------------------------------------------------------------------------------
+#
+#--Menu Title (a)
+%Vl(a,2,0,245,22,-)%Vf(ffffff)
+%?if(%cs, !=, 8)<%?if(%cs, !=, 7)<%s%al%Lt>>#  #Not ContextMenu or FilesMenu or QuickMenu
+%?if(%cs, =, 7)<%s%alFiles: %Lt>#              #Files Menu
+%?if(%cs, =, 8)<%s%al%Lt>#                     #Database Menu
+%?if(%cs, =, 10)<%s%alQuickScreen>#           #QuickScreen
+#
+#-- Menu Title (Shifted) (b)
+%Vl(b,23,0,225,22,-)%Vf(ffffff)
+%?if(%cs, !=, 8)<%?if(%cs, !=, 7)<%s%al%Lt>>#  #Not ContextMenu or FilesMenu or QuickMenu
+%?if(%cs, =, 7)<%s%alFiles: %Lt>#              #Files Menu
+%?if(%cs, =, 8)<%s%al%Lt>#                     #Database Menu
+%?if(%cs, =, 10)<%s%alQuickScreen>#           #QuickScreen
+#
+#-- Menu Title (Plugin Menu) (f)
+#%Vl(f,2,2,245,19,-)%Vf(1BADF8)%Vb(FFE784)
+%Vl(f,2,2,245,19,-)%Vf(1BADF8)
+%s%al%Lt
+#
+#-- Menu Title (Plugin Menu) (Shifted) (g)
+%Vl(g,23,2,225,19,-)%Vf(1BADF8)
+%s%al%Lt
+#
+#-- Context Menu Title (e)
+%Vl(e,50,42,218,19,-)%Vf(ffffff)
+%s%al%Lt #ContextMenu
+#
+#-- Disk Access Icons (c)
+%Vl(c,3,3,16,16,-)%Vf(ffffff)
+%t(0.1)%xd(Ba);%t(0.1)%xd(Bb);%t(0.1)%xd(Bc);%t(0.1)%xd(Bd);%t(0.1)%xd(Be);%t(0.1)%xd(Bf)
+#
+#-- Hold Icon (d)
+%Vl(d,3,3,16,16,-)%Vf(ffffff)
+%?mh<%xd(Ca)|>
+#
+#--TOP BAR RIGHT-------------------------------------------------------------------------------------------------------
+#
+#-- Clock / Battery Percent
+%Vl(h,248,2,50,19,-)%Vf(ffffff)
+%?if(%cs, !=, 14)<%ar%t(4)%?cf<%cH:%cM|%cl:%cM>;%t(4)%ar%bl%%>
+#
+#-- Clock (Plugin Screen)
+%Vl(f,253,2,45,19,-)%Vf(1BADF8)
+%ar%t(4)%?cf<%cH:%cM|%cl:%cM>;%t(4)%ar%bl%%
+#
+#-- Battery Icons
+%Vl(h,301,3,16,16,-)%Vf(ffffff)
+%?bp<%?bc<%t(1.0)%xd(Ab);%t(1.0)%xd(Ac)|%xd(Ad)>|%?bl<%xd(Ae)|%xd(Af)|%xd(Ag)|%xd(Ah)|%xd(Ai)|%xd(Aj)|%xd(Ak)|%xd(Al)|%xd(Am)|%xd(An)|%xd(Ao)|%xd(Ap)|%xd(Aq)|%xd(Ar)>>
+#
+#---------------------------------------------------------------------------------------------------------------------
+#
+#-- Play & Pause Icons (Bottom Bar)
+%Vl(h,3,221,16,16,-)%Vf(ffffff)
+%?mp<%xd(Dc)|%xd(Da)|%xd(Db)|%xd(Dd)|%xd(De)|%xd(Df)|%xd(Dg)|%xd(Dh)|%xd(Di)>
+#
+#
+#-- Now Playing Ticker (Bottom Bar)
+%Vl(h,23,218,225,22,-)%Vf(ffffff)
+%s%al%?mp<|%?it<%?ia<%it - %ia|%it>|%?ia<%fn - %ia|%fn>>|%?it<%?ia<%it - %ia|%it>|%?ia<%fn - %ia|%fn>>|Fast Forward|Rewind|Recording|Recording Paused|%?tx<%tf - %ty - %tz|Listening to %tf>|FM Paused>
+#
+##Song Title - Artist /else/ File Name##
+#%s%al%?it<%?ia<%it - %ia|%it>|%?ia<%fn - %ia|%fn>>
+#
+##Radio RDS /else/ Freq##
+#%?tx<[%tf] %ty - %tz|Listening to %tf>#
+#
+#-- Shuffle Icon
+%Vl(h,257,221,16,16,-)%Vf(ffffff)
+%?ps<%xd(Ea)|%xd(Eb)>
+#
+#-- repeat Icons
+%Vl(h,279,221,16,16,-)%Vf(ffffff)
+%?mm<%xd(Fe)|%xd(Fa)|%xd(Fb)|%xd(Fc)|%xd(Fd)>
+#
+#-- Volume Icons
+%Vl(h,301,221,16,16,-)%Vf(ffffff)
+%?pv<%xd(Ga)|%xd(Gb)|%xd(Gc)|%xd(Gd)|%xd(Ge)|%xd(Gf)|%xd(Gg)|%xd(Gh)|%xd(Gi)|%xd(Gj)|%xd(Gk)|%xd(Gl)|%xd(Gm)|%xd(Gn)>
+#
+#
+#--RECORDING SCREEN -----------------------------------------------------------------------------------------------------
+#
+%Vl(r,2,203,53,13,-)%Vf(ffffff)
+%xd(J)
+%Vl(r,79,203,53,13,-)%Vf(ffffff)
+%xd(I)
+%Vl(r,159,203,53,13,-)%Vf(ffffff)
+#%t(1)%xd(K);%t(1)%xd(M);
+%xd(K)
+%Vl(r,241,203,53,13,-)%Vf(ffffff)
+%xd(H)
+#
+#--Play Button Guide
+%Vl(r,26,203,53,14,2)%Vf(ffffff)
+#Record
+%s%al%?mp<Record|8|7|6|5|Pause|Resume|Pause|2|1|0>
+#%?if(%cs, !=, 14)<%ar%t(4)%?cf<%cH:%cM|%cl:%cM>;%t(4)%ar%bl%%>
+#
+#--MENU Button Guide
+%Vl(r,110,203,53,14,2)%Vf(ffffff)
+%s%al%?mp<Exit|8|7|6|5|Stop|Stop|Stop|Stop|2|1>
+#Exit
+#
+#--FWD/RWD Button Guide
+%Vl(r,189,203,53,14,2)%Vf(ffffff)
+Adjust
+#
+#--SELECT Button Guide
+%Vl(r,256,203,53,14,2)%Vf(ffffff)
+%s%al%?mp<Record|8|7|6|5|Split|Split|Split|2|1|0>
+#Record
+#
+######################################################################################################################
+#                                                                                                                    #
+# CREDITS AT .WPS FILE                                                                                               #
+#                                                                                                                    #
+######################################################################################################################

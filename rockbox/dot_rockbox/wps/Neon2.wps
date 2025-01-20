@@ -1,0 +1,78 @@
+#Theme Name: Neon2
+#By: P Poorten
+#Modified by E Halpin 12/27/2023
+#Licenced CC-BY-SA 3.0
+#
+#320x240 for ipod classic/video
+#Jan 2020
+# Some UI elements from: https://www.graphicsfuel.com/2013/02/dark-music-ui-elements-psd/
+# Dark Music UI Design Kit (PSD) at graphicsfuel.com (states free for commercial and personal use)
+# But as I don't have photoshop had to just reconstruct everything from the single screenshot, as can't use PSD files.
+# I think I did an ok job at reconstructing different button states and animated sliders, from static screenshot
+# But could probably be done better with access to the original UI elements. 
+
+# Fonts
+%Fl(5,19-Inter-V-padded.fnt)
+%Fl(4,16-Inter-SemiBold.fnt)
+
+# Disable Status Bar
+%wd
+
+# Backdrop
+%X(back3.bmp)
+
+# Repeat
+%V(241,41,68,32,0)
+%xl(E,repeat11.bmp,0,0,5)
+%?mm<%xd(Ee)|%xd(Ea)|%xd(Eb)|%xd(Ec)|%xd(Ed)>
+
+# Shuffle 
+%V(238,74,78,31,0)
+%xl(H,Shuffle10.bmp,0,0,2)
+%?ps<%xd(Hb)|%xd(Ha)>
+
+# Play Status
+%xl(F,pm4.bmp,0,0,5)
+%V(4,188,230,47,4)
+%?mp<%xd(Fa)|%xd(Fb)|%xd(Fc)|%xd(Fe)|%xd(Fd)>
+
+# Battery
+%V(248,11,60,16,4)%Vf(e57472)
+%ac%?if(%bc, =, c)<+|>%bl%% BL
+
+# Volume Slider
+%xl(S,VolSlider3.bmp)
+%V(266,112,26,116,-)
+%pv(0,0,26,116,VolBar2.bmp,slider,S)
+
+%xl(T,pbSlider.bmp)
+%V(4,161,229,25,-)
+%pb(0,0,229,25,pb.bmp,slider,T)
+
+# Track Number
+%V(12,11,55,16,4)%Vf(e57472)
+%al%pp/%pe
+
+# Volume
+%V(178,11,48,16,4)%Vf(e57472)
+%ar%?if(%pv, >, 0)<+|>%pv dB
+
+# Title
+%V(12,42,215,-,5)%Vf(4ed6f7)
+%s%al%?it<%it|%?d(2)<%d(2)|%(no tag%)>>
+
+# Artist
+%V(12,69,215,-,5)%Vf(e57472)
+%s%al%?ia<%ia|%(Unknown artist%)>
+
+# Album
+%V(12,96,215,-,5)%Vf(4ed6f7)
+%s%al%?id<%id|%?d(1)<%d(1)|%(Unknown Album%)>>
+
+# Codecs
+%V(12,123,215,-,5)%Vf(e57472)
+%al%fc | %fk  kHz%?rg<| %| %rg| %| %rg| %| %rg| %| %rg|>
+
+
+
+

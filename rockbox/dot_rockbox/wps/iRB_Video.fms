@@ -1,0 +1,106 @@
+# Theme: iRB_Video
+# By: IRD, v1.0, July 2021 (infra_red_dude@hotmail.com)
+# Based on iClassic Square By: Humberto Santana (humbertosantana@hotmail.com)
+# License: Creative Commons Attribution-Share Alike 3.0 (http://creativecommons.org/licenses/by-sa/3.0/)
+# Derived from iLike Theme for 320x240 by Alan Brito, which was ported from the 176x132 version by H. Pearce
+# If used for other works, as per this license, please include the following Attribution Text: "Modified/Derived from iVideo theme for iPod Video (CC-BY-SA 3.0) by Humberto Santana"
+#
+# FMS File
+#
+#-- Touchscreen related (N/A for iPod)
+%T(60,0,200,24,menu)
+%T(60,0,200,24,&cancel)
+%T(0,208,70,32,prev)
+%T(0,208,70,32,&rwd)
+%T(15,34,96,14,presets)
+%T(250,208,70,32,next)
+%T(250,208,70,32,&ffwd)
+%T(0,0,50,24,play)
+%T(0,0,50,24,&stop)
+%T(20,182,280,15,progressbar)
+#
+#-- Hide statusbar
+%wd
+#
+#-- Background
+%X(Backdrop.bmp)
+#
+#-- Font load
+#%Fl(2,18-Roboto-Bold.fnt)
+%Fl(2,20-SFCompactText-SemiBold.fnt)
+%Fl(3,12-Adobe-Helvetica-Bold.fnt,12)
+#
+#-- Image load
+%xl(A,AA Bottom.bmp,11,157)
+%xl(B,AA Left.bmp,11,61)
+%xl(C,AA Right.bmp,111,61)
+%xl(D,Battery Icon.bmp,0,0,25)
+%xl(E,Disk Access.bmp,0,0,6)
+%xl(F,Hold Icon.bmp,0,0)
+%xl(G,Playmode Icon.bmp,0,0,4)
+%xl(H,Stereo Icon.bmp,0,0)
+%xl(I,Volume Left.bmp,12,180)
+%xl(J,Volume Right.bmp,283,180)
+%xl(K,Volumebar Shadow Left.bmp,29,197)
+%xl(L,Volumebar Shadow Right.bmp,278,197)
+%xl(M,Radio Icon.bmp,0,0)
+#
+#-- display battery icons etc.
+%?lh<%Vd(a)|%Vd(b)>
+%xd(A)%xd(B)%xd(C)
+%?mv(2.0)<%Vd(g)%xd(I)%xd(J)%xd(K)%xd(L)%?St(volume display)<|%Vd(volume)>|%Vd(e)%Vd(f)>
+%V(286,6,25,12,-)%Vf(000000)%Vb(FFFFFF)
+%?bp<%?bc<%t(1.0)%xd(Da);%t(1.0)%xd(Db)|%xd(Dc)>|%?bl<%xd(Dd)|%xd(Dd)|%xd(De)|%xd(Df)|%xd(Dg)|%xd(Dh)|%xd(Di)|%xd(Dj)|%xd(Dk)|%xd(Dl)|%xd(Dm)|%xd(Dn)|%xd(Do)|%xd(Dp)|%xd(Dq)|%xd(Dr)|%xd(Ds)|%xd(Dt)|%xd(Du)|%xd(Dv)|%xd(Dw)|%xd(Dx)|%xd(Dy)>>
+#
+#-- display play/pause/hold etc. icons
+%Vl(a,36,4,16,16,-)%Vf(000000)%Vb(FFFFFF)
+%t(0.1)%xd(Ea);%t(0.1)%xd(Eb);%t(0.1)%xd(Ec);%t(0.1)%xd(Ed);%t(0.1)%xd(Ee);%t(0.1)%xd(Ef)
+%Vl(b,36,5,10,13,-)%Vf(000000)%Vb(FFFFFF)
+%?mh<%xd(F)|%?mr<%xd(F)>>
+%V(11,4,18,15,-)%Vf(000000)%Vb(FFFFFF)
+%?mp<|||||||%xd(Ga)|%xd(Gb)>
+#
+#-- display radio station number
+%ax%V(15,32,160,22,2)%Vf(000000)%Vb(FFFFFF)
+%s%al%?tm<%Sx(Scan)|%?Sr<%Tc %Sx(of) %Ti|%Ti %Sx(of) %Tc>>
+#
+#-- album art radio image
+%ax%V(15,61,96,96,-)%Vf(000000)%Vb(FFFFFF)
+%Cl(0,0,96,96,c,c)
+%?C<%Cd|%xd(M)>
+#
+#-- frequency info, tuning, station etc.
+%ax%V(120,70,190,22,2)%Vf(000000)%Vb(FFFFFF)
+%al%tf Mhz
+%Vl(g,29,182,254,15,-)%Vf(000000)%Vb(FFFFFF)
+%pv(0,0,254,15,Volumebar.bmp)
+%ax%V(120,100,190,2,2)%Vf(000000)%Vb(FFFFFF)
+%s%al%?Tn<%Tn|%?ty<%ty|%?tt<Tuned|tune>>>
+#
+#-- signal strength etc.
+%ax%V(120,130,190,2,2)%Vf(000000)%Vb(FFFFFF)
+%s%al%?tz<%tz|%Sx(Signal strength:) %?tr<Faint/No Signal|Weak|Fair|Strong|Very Strong>>
+%?mv(5)<%?St(battery display)<%Vd(title)|%Vd(titlebat)>|%Vd(clock)>
+%Vl(title,53,2,214,18,2)%Vf(000000)%Vb(FFFFFF)
+%s%ac%Sx(FM Radio)
+#
+#-- title bar/text/images etc.
+%Vl(titlebat,60,4,200,2,2)%Vf(000000)%Vb(FFFFFF)
+%s%ac%Sx(FM Radio)
+%Vl(clock,60,1,200,22,2)%Vf(000000)%Vb(FFFFFF)
+%t(10)%s%ac%Sx(FM Radio);%t(30)%s%ac%?cf<%cH:%cM|%cl:%cM %cP>
+%ax%V(282,34,17,22,-)%Vf(000000)%Vb(FFFFFF)
+%?ts<%xd(H)|>
+#
+#-- volume/progress/seek/tuning bar
+%Vl(volume,20,206,280,18,2)%Vf(000000)%Vb(FFFFFF)
+%ac%pv dB
+%Vl(e,20,182,280,15,-)%Vf(000000)%Vb(FFFFFF)
+%pb(0,0,280,15,Progress Bar.bmp)
+#
+#-- battery info
+%Vl(f,20,206,280,18,2)%Vf(000000)%Vb(FFFFFF)
+%al%ta%ar%tb
+%?St(battery display)<|%Vd(battery)>
+%Vl(battery,260,6,26,12,3)%Vf(000000)%Vb(FFFFFF)
+%ac%bl%%

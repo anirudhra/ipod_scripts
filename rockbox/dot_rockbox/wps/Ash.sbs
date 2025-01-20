@@ -1,0 +1,87 @@
+# Theme by Guillaume Cocatre-Zilgien <gcocatre@gmail.com>
+# CC-BY-SA
+
+# Disable Status Bar
+%wd
+
+# Backdrop
+%X(-)
+
+# Preload Font
+%Fl(2,14-Nimbus.fnt)
+
+# Preload Images
+%xl(playmodes,playmodes.bmp,0,0,9)
+%xl(battery,battery.bmp,0,0,5)
+
+# Menu
+%Vi(-,2,33,316,171,-)
+
+# Display Viewports
+%Vd(volume)
+%?if(%Lt, =, themes)<%Vd(themetitle)|%Vd(title)>
+%?if(%St(battery display), =, numeric)<%Vd(batteryn)|%?if(%bc, =, c)<%Vd(batteryn)|%?if(%bp, =, p)<%Vd(batteryn)|%Vd(batteryg)>>>
+# Playback stopped
+%?if(%mp, =, 1)<%?if(%Lt, =, themes)<%Vd(themesurl)|%Vd(date)>|>
+# Playback not stopped, playing music
+%?if(%mp, >, 1)<%?if(%mp, <=, 7)<%?if(%ig, =, Chamber Music)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Classical)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Opera)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Sonata)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Symphony)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%Vd(art)%Vd(metadata)%Vd(playbackmode)>>>>>|>|>
+# Playback not stopped, listening to the radio
+%?if(%mp, >, 1)<%?if(%mp, >=, 8)<%Vd(art)%Vd(radio)%Vd(playbackmode)|>|>
+
+# Volume
+%Vl(volume,5,5,45,14,2)
+%Vf(393839)
+%al%?if(%pv, >, 0)<+|>%pv dB
+
+# Menu Title
+%Vl(title,50,5,230,14,2)
+%Vf(393839)
+%ac%?if(%mh, =, h)<[ |>%?if(%lh, =, h)<…|>%?Lt<%Lt|Rockbox>%?if(%lh, =, h)<…|>%?if(%mh, =, h)< ]|>
+
+# Theme Menu Title
+%Vl(themetitle,50,5,230,14,2)
+%Vf(393839)
+%ac%?if(%mh, =, h)<[ |>%?if(%lh, =, h)<…|>Ash r94%?if(%lh, =, h)<…|>%?if(%mh, =, h)< ]|>
+
+# Battery (graphical)
+%Vl(batteryg,289,6,25,12,-)
+%?if(%bl, >, 88)<%xd(battery,5)|%?if(%bl, >, 63)<%xd(battery,4)|%?if(%bl, >, 38)<%xd(battery,3)|%?if(%bl, >, 13)<%xd(battery,2)|%xd(battery,1)>>>>
+
+# Battery (numerical)
+%Vl(batteryn,280,5,34,14,2)
+%Vf(393839)
+%ar%?if(%bc, =, c)<+|>%bl%%
+
+# Cover Artwork
+%Vl(art,2,216,22,22,-)
+%Cl(0,0,22,22,c,c)
+%Cd
+
+# Song Metadata
+%Vl(metadata,26,220,269,14,2)
+%Vf(393839)
+%s%al %?it<“%it”|%fn>%?ia<%, by %ia|%?iA<%, by %iA|>> 
+
+# Song Metadata (Composer)
+%Vl(composer,26,220,269,14,2)
+%Vf(393839)
+%s%al %?it<“%it”|%fn>%?ic<%, by %ic|%?ia<%, by %ia|%?iA<%, by %iA|>>> 
+
+# Radio Name and Frequency
+%Vl(radio,26,220,269,14,2)
+%Vf(393839)
+%s%al %?Tn<%Tn %(%tf FM%)|%?ty<%ty %(%tf FM%)|FM Radio %(%tf MHz%)>> 
+
+# Playback Mode Icons
+%Vl(playbackmode,301,220,13,13,-)
+%xd(playmodes,%mp)
+
+# Date / Time
+%Vl(date,26,220,292,14,2)
+%Vf(393839)
+%al %?cu<Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday>, %?cm<January|February|March|April|May|June|July|August|September|October|November|December> %ce, %cY%ar%?cf<%cH:%cM|%cl:%cM %cP> 
+
+# Themes URL
+%Vl(themesurl,26,220,292,14,2)
+%Vf(393839)
+%s%al http://caudec.net/rockbox/ 

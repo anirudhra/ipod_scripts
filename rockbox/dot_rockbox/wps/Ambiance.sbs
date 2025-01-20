@@ -1,0 +1,94 @@
+#__________________________________________
+#   
+#          -=# Ambiance (V1.0) #=-
+#
+#  For MP3 players of the resolution 220x176
+#  by Eduardo Rivas (jerivasmelgar(at)gmail.com)
+#
+#  Code based on Darkness
+#  by Luke Wagner AKA Doleo (lwagner5465(at)gmail.com)
+#  and Keep it Simple, Stupid! v2
+#  by Michael Huth (http://themes.rockbox.org/index.php?themeid=1119)
+#			
+#  All graphics are from the Ubuntu-mono-dark
+#  and Humanity iconsets, owned by Canonical Ltd.
+#
+#  [Last Modified on 12/29/2010]
+#__________________________________________
+#
+# This theme is released under the following license:
+# Creative Commons Attribution-Share Alike 3.0 Unported License
+# http://creativecommons.org/licenses/by-sa/3.0/
+#__________________________________________
+#
+#
+# Converted to 320x240 resolution (for ipod classic/video etc)
+# By P Poorten
+# October 2015
+#
+%wd
+%Vi(-,4,24,-,192,1)
+#__________________________________________
+#Images:
+#
+%xl(a,playstatussmall.bmp,0,0,2)
+%xl(d,volume.bmp,0,0,4)
+%xl(i,battery.bmp,0,0,6)
+#_______________________________________
+#Top panel:
+%V(0,0,-,19,1)
+#_______________________________________
+#Tray icons:
+#
+%V(5,5,26,15,0)
+#Power
+%?bp<%?bc<%xd(if)%Vd(b)|%xd(if)%Vd(c)>|%Vd(a)%?bl<%xd(ia)|%xd(ia)|%xd(ib)|%xd(ic)|%xd(id)|%xd(ie)>>
+#Battery %
+%V(40,7,50,20,0)
+%bl
+#Volume
+%V(192,0,50,20,0)
+%?pv<%xd(da)|%xd(db)|%xd(db)|%xd(dc)|%xd(dc)|%xd(dd)|%xd(dd)>
+#Date
+%V(227,7,50,10,0)%Vf(CCCCCC)
+%cb %cd
+#Real Time Clock
+%V(268,7,50,10,0)%Vf(CCCCCC)
+%?cc<%?cf<%ac%cH:%cM:%cS|%al%cl:%cM %cP>|Clock needs setting!>
+#
+#_______________________________________
+#Bottom Panel:
+%V(0,220,176,13,1)
+%?mp<|%Vd(e)|%Vd(f)|Ffwd|Rew|%Vd(g)|%Vd(h)|%Vd(i)|%Vd(j)>
+#
+#Playing Track
+%Vl(e,2,220,11,-,0)%Vf(CCCCCC)
+%xd(aa)
+%Vl(e,13,223,205,10,0)%Vf(CCCCCC)
+%al%s%?ia<%ia|%?iA<%iA|%?d(2)<%d(2)|%Sx(Unknown)>>> - %?it<%it|%fn>   
+#
+#Paused Track
+%Vl(f,2,221,12,-,0)%Vf(CCCCCC)
+%xd(ab)
+%Vl(f,13,223,205,10,0)%Vf(CCCCCC)
+%al%s%?ia<%ia|%?iA<%iA|%?d(2)<%d(2)|%Sx(Unknown)>>> - %?it<%it|%fn>
+#
+#Recording
+%Vl(g,0,223,305,10,0)%Vf(CCCCCC)
+%?Rp<%s%al Recording - %?Re<WAV|AIFF|WV|MP3> at %?Rb<8|16|24|32|40|48|56|64|80|96|112|128|144|160|192> Kbps>
+#
+#Recording paused
+%Vl(h,0,223,305,10,0)%Vf(CCCCCC)
+%?Rp<%s%al Recording - %?Re<WAV|AIFF|WV|MP3> at %?Rb<8|16|24|32|40|48|56|64|80|96|112|128|144|160|192> Kbps %(paused%)>
+#
+#FM Radio
+%Vl(i,2,220,11,-,0)%Vf(CCCCCC)
+%?tp<%xd(aa)>
+%Vl(i,13,223,205,10,0)%Vf(CCCCCC)
+%?tp<%al%tf - %?ts<%Sx(Stereo)|%Sx(Mono)>>
+#
+#FM Radio muted
+%Vl(j,2,220,11,-,0)%Vf(CCCCCC)
+%?tp<%xd(ab)>
+%Vl(j,13,223,205,10,0)%Vf(CCCCCC)
+%?tp<%al%tf - %?ts<%Sx(Stereo)|%Sx(Mono)> %(muted%)>

@@ -1,0 +1,56 @@
+# Theme:SlateyPod2
+# Version:1.0
+# Device:Surfans F20, Hifi Walker H2
+# Adapted by: Eamon Halpin
+# License: CC-BY-SA
+
+#-- Title Bar Disabler
+%?Lt<|>
+# Disable Status Bar
+%wd
+#-- Backdrop
+%X(Backdrop - SBS.bmp) 
+
+#-- Fonts
+%Fl(2,16-Inter-SemiBold.fnt)
+%Fl(3,19-Inter-V-padded.fnt)
+
+# Menu
+%Vi(-,2,32,-2,-32,3)%Vf(aeaeae)
+# Display Viewports
+%Vd(volume)
+%?if(%Lt, =, themes)<%Vd(themetitle)|%Vd(title)>
+%?if(%St(battery display), =, numeric)<%Vd(batteryn)|%?if(%bc, =, c)<%Vd(batteryn)|%?if(%bp, =, p)<%Vd(batteryn)|%Vd(batteryg)>>>
+# Playback stopped
+%?if(%mp, =, 1)<%?if(%Lt, =, themes)<%Vd(themesurl)|%Vd(date)>|>
+# Playback not stopped, playing music
+%?if(%mp, >, 1)<%?if(%mp, <=, 7)<%?if(%ig, =, Chamber Music)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Classical)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Opera)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Sonata)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%?if(%ig, =, Symphony)<%Vd(art)%Vd(composer)%Vd(playbackmode)|%Vd(art)%Vd(metadata)%Vd(playbackmode)>>>>>|>|>
+# Playback not stopped, listening to the radio
+%?if(%mp, >, 1)<%?if(%mp, >=, 8)<%Vd(art)%Vd(radio)%Vd(playbackmode)|>|>
+
+# Menu Title
+%Vl(title,32,2,-32,16,2)
+%Vf(8b8b8b)
+%ac%?if(%mh, =, h)<[ |>%?if(%lh, =, h)<|>%?Lt<%Lt|Rockbox>%?if(%lh, =, h)<|>%?if(%mh, =, h)< ]|>
+
+# Theme Menu Title
+%Vl(themetitle,6,3,-6,16,2)
+%Vf(8b8b8b)
+%ac%?if(%mh, =, h)<[ |>%?if(%lh, =, h)<|>SlateyPod2%?if(%lh, =, h)<|>%?if(%mh, =, h)< ]|>
+
+# Cover Artwork
+%Vl(art,3,223,14,14,-)
+%Cl(0,0,14,14,c,c)
+%Cd
+
+# Song Metadata
+%V(32,221,-32,16,2)%Vf(8b8b8b)
+%ac%?mp<End of Playlist|||Seeking|Seeking|Recording|Paused|Position|Position> %s%?it<%s%it|%fn>
+
+# Preload Images
+%xl(playmodes,playmodes.bmp,0,0,9)
+#%xl(battery,battery.bmp,0,0,5)
+
+# Playback Mode Icons
+%Vl(playbackmode,304,223,13,13,-)
+%xd(playmodes,%mp)

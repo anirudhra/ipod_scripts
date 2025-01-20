@@ -1,0 +1,169 @@
+######################################################################################################################
+# THEME       : InfoMatrix                                                                                           #
+# Version     : 1.0 (28 JAN 2020)                                                                                    #
+# TARGET(S)   : Apple iPod Video / Classic (Originally for iPod Nano 1G / 2G)                                        #
+# AUTHOR      : yuuiko (Forum Name)  - Contact: (yyuuiko@icloud.com)                                                 #
+# LICENSE     : CC-BY-SA                                                                                             #
+# COPYRIGHT   : ©c.yu (yuuiko) (2020)                                                                                #
+######################################################################################################################
+#-- Status Bar Disabler
+%wd
+#
+#-- Backdrop
+#%X(Backdrop - WPS.bmp)
+#
+#-- PreLoad Fonts
+%Fl(2,14-Rockbox-Mix.fnt)
+%Fl(3,12-Nimbus.fnt)
+#
+#-- Album Art Handler
+#
+%xl(G,No Art.bmp,0,0)
+%V(7,7,145,145,-)
+%Cl(0,0,145,145)
+%?C<%Cd|%xd(G)>
+#
+#----Draw UI---------------------------------------------------------------------------------------------
+#
+%V(4,4,1,151,-)%Vf(ffffff)#artworkleft
+%dr(0,0,-,-)
+%V(5,4,149,1,-)%Vf(ffffff)#artworktop
+%dr(0,0,-,-)
+%V(5,154,149,1,-)%Vf(ffffff)#artworkbottom
+%dr(0,0,-,-)
+%V(154,4,1,151,-)%Vf(ffffff)#artworkright
+%dr(0,0,-,-)
+#
+%V(158,4,5,1,-)%Vf(ffffff)#voltop
+%dr(0,0,-,-)
+#%V(158,154,5,1,-)%Vf(ffffff)#volbottom
+%V(162,5,1,149,-)%Vf(ffffff)#volright
+%dr(0,0,-,-)
+#
+%V(154,158,1,5,-)%Vf(ffffff)#pbright
+%dr(0,0,-,-)
+%V(4,158,1,5,-)%Vf(ffffff)#pbleft
+%dr(0,0,-,-)
+%V(5,162,149,1,-)%Vf(ffffff)#pbbottom
+%dr(0,0,-,-)
+#
+%V(170,68,141,1,-)%Vf(ffffff)#seperator1
+%dr(0,0,-,-)
+%V(170,114,141,1,-)%Vf(ffffff)#seperator2
+%dr(0,0,-,-)
+%V(165,158,146,1,-)%Vf(ffffff)#seperator3a
+%dr(0,0,-,-)
+%V(165,162,146,1,-)%Vf(ffffff)#seperator3b
+%dr(0,0,-,-)
+%V(160,165,1,72,-)%Vf(ffffff)#seperator4 (vertical)
+%dr(0,0,-,-)
+#
+#----SONG Info------------------------------------------------------------------------------------------------------
+#
+#-- Now Playing (TrackName)
+%V(170,6,141,22,-)%Vf(ffffff)
+%s%aL%?it<%it|%?fn<%fn|Unknown Track>>
+#
+#-- Now Playing (Artist)
+%V(170,31,141,14,2)%Vf(ffffff)
+%s%aL%?ia<%ia|Unknown %Sx(Artist)>
+#%?in<%s%aL%t(8)%?ia<%ia|Unknown %Sx(Artist)>;%s%aL%t(4)%?in<Track %in|Track N/A>|%s%aL%?ia<%ia|Unknown %Sx(Artist)>>
+#
+#-- Now Playing (Album/Year)
+%V(170,50,141,14,2)%Vf(ffffff)
+%s%aL%?id<%id|Unknown Album>
+#%?iy<%s%aL%t(8)%?id<%id|Unknown Album>;%s%aL%t(4)%?iy<%iy|Year N/A>|%s%aL%?id<%id|Unknown Album>>
+#If <Year is Available (Album <-> Year) | else if no year is available (Album Only)>
+#
+#----ALBUM Info ------------------------------------------------------------------------------------------------------
+#
+#-- Current Track Num
+%V(170,75,141,21,-)%Vf(ffffff)
+%s%aL%?in<Track %in|Track ->
+#
+#-- Album Year
+%V(170,96,141,14,2)%Vf(ffffff)
+%s%aL%?iy<Year: %iy|Year:  ---->
+#
+#----VOLUME / File-----------------------------------------------------------------------------------------------------
+#
+#--Volume / File Type Handler
+%?mv(2.0)<%Vd(d)|%Vd(c)>
+#
+#-- File Type / Track Number
+%Vl(c,170,120,141,19,-)%Vf(ffffff)
+%s%al%fc
+#
+#-- "VOLUME" label
+%Vl(d,170,120,141,19,-)%Vf(ffffff)
+%Sx(Volume)
+#
+#-- Vol DB / File Bitrate
+%V(170,140,141,14,2)%Vf(ffffff)
+%?mv(2.0)<%pvdB|%s%aL%?fv<avg %fb kbps|%fb kbps>>
+#
+#-- Volume Bar
+%xl(J,Volume Slider.bmp,0,0)
+%V(158,5,4,151,-)%Vf(ffffff)
+%pv(0,0,4,151,Volume Bar.bmp,vertical,slider,J)
+#
+#----Clock/Next--------------------------------------------------------------------------------------------------------
+#
+#-- Playlist Number / Time
+%V(170,172,141,19,-)%Vf(ffffff)
+%?if(%pp, =, %pe)<%pp %Sx(of) %pe|%t(5)%aL%pp %Sx(of) %pe%aR%?cf<%cH:%cM|%cl:%cM>;%t(4)%s%ca%, %cb %ce>
+#%?if(%pp, =, %pe)<%pp %Sx(of) %pe|%t(5)%aL%pp %Sx(of) %pe;%t(3)%aL%?cf<%cH:%cM|%cl:%cM %cP>;%t(4)%s%ca%, %cb %ce>
+#
+#-- Next Track (TrackName)
+%V(170,196,141,14,2)%Vf(ffffff)
+%?mm<%?if(%pp, =, %pe)<%s%ca%, %ce %cb|%s%aL%?It<Next: %It|%?Fn<Next: %Fn|Unknown Track>>>|%s%aL%?It<Next: %It|%?Fn<Next: %Fn|Unknown Track>>|%s%aL%?It<Next: %It|%?Fn<Next: %Fn|Unknown Track>>|%s%aL%?It<Next: %It|%?Fn<Next: %Fn|Unknown Track>>|%s%aL%?It<Next: %It|%?Fn<Next: %Fn|Unknown Track>>>
+#
+#-- Next Track (Artist)
+%V(170,217,141,14,2)%Vf(ffffff)
+%?mm<%?if(%pp, =, %pe)<%aL%?cf<%cH:%cM|%cl:%cM %cP>|%?Ia<%s%aLBy: %Ia|Unknown Artist>>|%?Ia<%s%aLBy: %Ia|Unknown Artist>|%?Ia<%s%aLBy: %Ia|Unknown Artist>|%?Ia<%s%aLBy: %Ia|Unknown Artist>|%?Ia<%s%aLBy: %Ia|Unknown Artist>>
+#
+#----Progress----------------------------------------------------------------------------------------------------------
+#
+#-- Progress Bar
+%xl(I,Progress Slider.bmp,0,0)
+%V(5,158,149,4,-)%Vf(7bffde)
+%pb(0,0,149,4,Progress Bar.bmp,slider,I)
+#
+#-- Current Track Time
+%V(6,172,60,19,-)%Vf(ffffff)
+%al%pc
+#
+#-- Remaining Track Time
+%V(92,172,60,19,-)%Vf(ffffff)
+%ar-%pr
+#
+#----Icon Bar----------------------------------------------------------------------------------------------------------
+#
+#-- Preloaded Images - ICON BAR
+%xl(A,Repeat Icons.bmp,0,0,5)
+%V(108,214,16,16,-)%Vf(ffffff)
+%?mm<%xd(Ae)|%xd(Aa)|%xd(Ab)|%xd(Ac)|%xd(Ad)>
+#
+%xl(B,Shuffle Icon.bmp,0,0,2)
+%V(83,214,16,16,-)%Vf(ffffff)
+%?ps<%xd(Ba)|%xd(Bb)>
+#
+#%?mh<%Vd(H)|%?lh<%Vd(L)|>>
+#%?mh<%Vd(H)>
+#%?lh<%Vd(L)>
+#
+%xl(C,Hold Icon.bmp,0,0,2)
+%V(9,214,16,16,-)%Vf(ffffff)
+%?mh<%xd(Ca)|%xd(Cb)>
+#
+%xl(F,Disk Access Icons.bmp,0,0,7)
+%V(34,214,16,16,-)%Vf(ffffff)
+%?lh<%t(0.1)%xd(Fa);%t(0.1)%xd(Fb);%t(0.1)%xd(Fc);%t(0.1)%xd(Fd);%t(0.1)%xd(Fe);%t(0.1)%xd(Ff)|%xd(Fg)>
+#
+%xl(D,PlayStatus Icons.bmp,0,0,9)
+%V(135,214,16,16,-)%Vf(ffffff)
+%?mp<%xd(Dc)|%xd(Da)|%xd(Db)|%xd(Dd)|%xd(De)>
+#
+%xl(E,Battery Icons.bmp,0,0,18)
+%V(59,214,16,16,-)%Vf(ffffff)
+%?bp<%?bc<%t(1.0)%xd(Ea);%t(1.0)%xd(Ec)|%xd(Ed)>|%?bl<%xd(Ee)|%xd(Ef)|%xd(Eg)|%xd(Eh)|%xd(Ei)|%xd(Ej)|%xd(Ek)|%xd(El)|%xd(Em)|%xd(En)|%xd(Eo)|%xd(Ep)|%xd(Eq)|%xd(Er)>>

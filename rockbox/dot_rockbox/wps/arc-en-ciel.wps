@@ -1,0 +1,317 @@
+# Rockbox Theme Name: arc-en-ciel
+# Platform: Cowon D2 (320x240x24)
+# Author: Simon Rothen (rothen@gmx.net)
+# Licencing: CC-BY-SA 3.0
+# faenza Iconset: icons for Gnome by Matthieu James under GPL. 8bit alpha
+# Battery, Repeat, Shuffle and Reception Icons derived from Gnome-Shell High Contrast Icons
+#
+# Version: 1.7
+# Date: 2015-09-16
+# Changelog: see CFG file
+#
+# WPS File
+#
+# Additional Fonts
+%Fl(2,28 Ubuntu [Bold].fnt) 
+%Fl(3,14-Ubuntu-R.fnt) 
+%Fl(4,14-Ubuntu-B.fnt) 
+%Fl(5,24 Ubuntu [Bold].fnt) 
+%Fl(6,12-Ubuntu-R.fnt)
+%Fl(8,17-Ubuntu-R.fnt) 
+
+# Disable Status Bar
+%wd
+
+# Background 
+%X(wps_bg.bmp)
+
+
+
+### TOUCHSCREEN AREAS
+
+# Quickscreen
+%T(0,0,72,28,quickscreen)
+
+# Menu
+%T(100,0,120,28,menu)
+
+# Contextmenu
+%T(244,0,76,28,contextmenu)
+
+# Progressbar
+%T(1,28,318,22,progressbar)
+
+# Pause/Play + Stop
+%T(139,200,42,40,stop,long_press)
+%T(play,139,200,42,40,play)
+
+# Previous + REW
+%T(91,200,32,40,rwd,repeat_press)
+%T(rr,91,200,32,40,wps_prev)
+
+# Next + FFW
+%T(197,200,35,40,ffwd,repeat_press)
+%T(ff,197,200,35,40,wps_next)
+
+# Files/DB + Context Menu
+%T(0,36,320,80,browse,long_press)
+
+# Playlist
+%T(playlist,0,120,320,80,playlist,long_press)
+
+# Info Screen
+%T(info,0,50,320,150,none)
+
+# Shuffle
+%T(shuffle,45,200,33,40,shuffle)
+
+# Repeat
+%T(repeat,8,200,33,40,repmode)
+
+
+
+### VIEWPORTS
+
+# Toggle "Info screen"-"WPS screen" var_i_touched var_display 
+%?Tl(info,0.1)<%?if(%vg(var_i_touched), =, 1)<%vs(var_i_touched, set, 2)%?if(%vg(var_display), =, 1)<%vs(var_display, set, 2)|%vs(var_display, set, 1)>>|%vs(var_i_touched, set, 1)>
+
+# Timeout to go from infoscreen back to WPS
+%?vl(var_display, 22)<|%vs(var_display, set, 1)> 
+
+# Touchscreen present? (Workaround, on nontouchscreen targets, variables stay 1)
+%vs(target_has_touchscreen, set, 2)
+
+
+## QUERY for Conditional Viewports: i - infoscreen, c - normal (not infoscreen), a - albumart only, b - non album art only,
+#    g - short,big titlename, k - long,small titlename, n - short,big albumname, s - long,small albumbname,
+#    p - Touchscreen only infoscreen w - while not scanning  x - while scanning
+%?if(%vg(target_has_touchscreen), =, 2)<%?if(%vg(var_display), =, 2)<%Vd(i)|%Vd(c)%?mp<|%Vd(w)|%Vd(w)|%Vd(x)|%Vd(x)|%Vd(w)>%?C<%Vd(a)%?if(%ss(0, 24, %id), =, %id)<%Vd(n)|%Vd(s)>|%Vd(b)>%?it<%?if(%ss(0, 24, %it), =, %it)<%Vd(g)|%Vd(k)>|%Vd(k)>>|%?mh<%Vd(i)%Vd(p)|%Vd(c)%?mp<|%Vd(w)|%Vd(w)|%Vd(x)|%Vd(x)|%Vd(w)>%?C<%Vd(a)%?if(%ss(0, 24, %id), =, %id)<%Vd(n)|%Vd(s)>|%Vd(b)>%?it<%?if(%ss(0, 24, %it), =, %it)<%Vd(g)|%Vd(k)>|%Vd(k)>>>
+# Non-Touchscreen Targets: if you want do display infoscreen on volume-change instead of on lock, uncomment the next line instead of the one above
+# %?if(%vg(target_has_touchscreen), =, 2)<%?if(%vg(var_display), =, 2)<%Vd(i)|%Vd(c)%?mp<|%Vd(w)|%Vd(w)|%Vd(x)|%Vd(x)|%Vd(w)>%?C<%Vd(a)%?if(%ss(0, 24, %id), =, %id)<%Vd(n)|%Vd(s)>|%Vd(b)>%?it<%?if(%ss(0, 24, %it), =, %it)<%Vd(g)|%Vd(k)>|%Vd(k)>>|%?mv(7)<%Vd(i)%Vd(p)|%Vd(c)%?mp<|%Vd(w)|%Vd(w)|%Vd(x)|%Vd(x)|%Vd(w)>%?C<%Vd(a)%?if(%ss(0, 24, %id), =, %id)<%Vd(n)|%Vd(s)>|%Vd(b)>%?it<%?if(%ss(0, 24, %it), =, %it)<%Vd(g)|%Vd(k)>|%Vd(k)>>>
+
+
+## Top Bar
+
+# Lock
+%xl(h,lock.bmp,0,0,2)
+%Vl(c,4,6,12,16,-)
+%?mh<%xd(hb)>
+
+# Artist (trackposition, volumen)
+%Vl(w,20,3,280,25,5)%?mp<|%Vf(EEEEEE)|%Vf(999999)|%Vf(EEEEEE)>
+%s%ac%?mv(1)<%pv dB|%?mp<|%ia|%ia|%pc %Vd(x)|%pc %Vd(x)|%ia>>
+%Vl(x,114,3,50,25,5)%Vf(EEEEEE)
+%ar%pc
+%Vl(x,167,12,48,12,4)%Vf(EEEEEE)
+/ %pt
+
+# Battery low warning & charging
+%xl(g,bat.bmp,0,0,8)
+%Vl(c,302,8,16,16,-)
+%?bp<%?bl<|%xd(gh)|%xd(gg)|%xd(gf)|%xd(ge)|%xd(ge)>|%?bl<|%xd(gd)|||||>>
+
+# Progress Bar
+# condition viewport for progressbar only: grey when on pause
+%?mp<|%Vd(z)|%Vd(y)|%Vd(z)>
+%Vl(z,1,28,318,5,-)
+%?if(%pt, >, 80)<%?if(%pt, >, 150)<%?if(%pt, >, 180)<%?if(%pt, >, 202)<%?if(%pt, >, 219)<%?if(%pt, >, 237)<%?if(%pt, >, 262)<%?if(%pt, >, 292)<%?if(%pt, >, 390)<%pb(0,0,-,-,pb_10.bmp)|%pb(0,0,-,-,pb_9.bmp)>|%pb(0,0,-,-,pb_8.bmp)>|%pb(0,0,-,-,pb_7.bmp)>|%pb(0,0,-,-,pb_6.bmp)>|%pb(0,0,-,-,pb_5.bmp)>|%pb(0,0,-,-,pb_4.bmp)>|%pb(0,0,-,-,pb_3.bmp)>|%pb(0,0,-,-,pb_2.bmp)>|%pb(0,0,-,-,pb_1.bmp)>
+%Vl(y,1,28,318,5,-)
+%pb(0,0,-,-,pb_grey.bmp)
+
+# Trackname
+%Vl(g,5,39,310,27,2)%?mp<|%Vf(181818)|%Vf(AAAAAA)|%Vf(181818)>
+%s%ac%?it<%it|%fn>
+%Vl(k,5,42,310,25,5)%?mp<|%Vf(181818)|%Vf(AAAAAA)|%Vf(181818)>
+%s%ac%?it<%it|%fn>
+
+# Codec
+%xl(c,codec.bmp,0,0,5)
+%Vl(a,261,151,48,48,-)
+%?pn<|%?fc<||||%xd(ca)||%xd(cc)|||%xd(cd)|%xd(ce)||||||||%xd(cb)|>>
+
+## Album Art
+
+# Album Art + Frame
+%xl(l,aa_frame_l.bmp,0,0)
+%xl(r,aa_frame_r.bmp,0,0)
+%xl(t,aa_frame_t.bmp,0,0)
+%xl(b,aa_frame_b.bmp,0,0)
+%Vl(a,6,70,4,138,-) 
+%xd(l)
+%Vl(a,136,70,8,138,-) 
+%xd(r)
+%Vl(a,10,70,126,4,-) 
+%xd(t)
+%Vl(a,10,200,126,8,-) 
+%xd(b)
+%Vl(a,10,74,126,126,-)
+%Cl(0,0,126,126)
+%dr(0,0,126,126,797979)
+%Cd
+
+# Album
+%Vl(n,152,118,158,17,8)%Vf(181818)
+%s%al%?id<%id>
+%Vl(s,152,121,158,13,3)%Vf(181818)
+%s%al%?id<%id>
+%Vl(a,152,135,40,13,3)%Vf(555555)
+%al%?iy<%iy>
+
+# Playlist
+%Vl(a,152,172,158,26,3)%Vf(181818)
+%s%?pn<"%pn">
+%s%pp %Sx(of) %pe
+
+
+## NO Album Art
+
+# Album
+%Vl(b,10,118,300,17,8)%Vf(181818)
+%ac%s%?id<%id>
+%Vl(b,10,135,300,13,3)%Vf(555555)
+%ac%?iy<%iy>
+
+# Playlist
+%Vl(b,10,172,300,26,3)%Vf(181818)
+%s%ac%?pn<"%pn">
+%s%ac%pp %Sx(of) %pe
+
+
+## Infoscreen
+
+# Volumen (non-touch only)
+#%Vl(p,120,3,80,25,5)%Vf(EEEEEE)
+#%ac%pv dB
+
+# Times
+%Vl(i,7,3,50,25,5)%Vf(EEEEEE)
+%ar%?mp<|%pc|%t(0.5)%pc;%t(0.5)|%pc>
+%Vl(i,60,12,48,12,4)%Vf(EEEEEE)
+/ %pt
+
+# Clock & Battery
+%Vl(i,216,12,86,12,4)%Vf(EEEEEE)
+%ar%?cc<%?cf<%ck:%cM|%cl:%cM %cp>   |>%bl%%
+%Vl(i,302,8,16,16,-)
+%?bp<%?bl<|%xd(gh)|%xd(gg)|%xd(gf)|%xd(ge)|%xd(ge)>|%?bl<|%xd(gd)|%xd(gc)|%xd(gb)|%xd(gb)|%xd(ga)|%xd(ga)>>
+
+# Track Information
+%Vl(i,12,39,41,68,3)%Vf(181818)
+%?it<Title|File>%ar:
+Artist%ar:
+Album%ar:
+Comnt%ar:
+Genre%ar:
+
+%Vl(i,57,39,138,68,4)%Vf(181818)
+%s%?it<%it|%fn>
+%ia
+%s%id
+%s%?iC<%iC>
+%ig
+
+%Vl(i,204,39,43,68,3)%Vf(181818)
+Track%ar:
+Year%ar:
+%?rg<Freq|RG Tr|RG Al|RG Tr|RG Al|Freq>%ar:
+Codec%ar:
+Bitrate%ar:
+#Length%ar:
+
+%Vl(i,251,39,61,68,4)%Vf(181818)
+%s%in%?ik<  (cd%ik%)>
+%iy
+%?rg<%fk kHz|%rg|%rg|%rg|%rg|%fk kHz>
+%fc%?fv<| cbr>
+%fb kbps
+#%pt
+
+
+# Playlist
+%Vl(i,7,111,310,13,4)%Vf(181818)
+%?pn<"%pn"|%Sx(Current Playlist)> [%pe]
+
+%Vl(i,0,124,320,3,-)
+%dr(6,0,308,2,777777)
+
+%Vl(i,19,129,179,13,3)%Vf(555555)
+%Vp(-1,%?if(%pp,>,0)<%?if(%pp,<,10)<  %pp|%pp>. |      >%?it<%it|%fn>)
+#%Vl(i,11,129,31,13,3)%Vf(555555)
+#%Vp(-1,%?if(%pp,>,0)<%ar%pp.>)
+#%Vl(i,43,129,155,13,3)%Vf(555555)
+#%Vp(-1,%?it<%it|%fn>)
+%Vl(i,206,129,108,13,3)%Vf(555555)
+%Vp(-1,%?ia<%ia>)
+
+
+%Vl(i,16,142,182,13,4)%Vf(181818)
+%?if(%pp,<,10)<   %pp| %pp>. %?it<%it|%fn>
+#%Vl(i,11,142,31,13,4)%Vf(181818)
+#%ar%pp.
+%Vl(i,9,145,6,7,-)
+%x(p, play_infoscreen.bmp, 0, 0)
+#%Vl(i,42,142,156,13,4)%Vf(181818)
+#%?it<%it|%fn>
+%Vl(i,205,142,109,13,4)%Vf(181818)
+%ia
+
+%Vl(i,19,155,179,52,3)%Vf(555555)
+%Vp(1,%?if(%pp,<,10)<  %pp|%pp>. %?it<%it|%fn>)
+#%Vl(i,11,155,31,52,3)%Vf(555555)
+#%Vp(1,%ar%pp.)
+#%Vl(i,43,155,155,52,3)%Vf(555555)
+#%Vp(1,%?it<%it|%fn>)
+%Vl(i,206,155,108,52,3)%Vf(555555)
+%Vp(1,%?ia<%ia>)
+
+
+## Bottom Bar
+
+# Repeat
+%xl(q,repeat.bmp,0,0,5)
+%Vl(i,11,218,30,14,-)
+<%?mm<%xd(qa)|%xd(qb)|%xd(qc)|%xd(qd)|%xd(qe)>
+%Vl(c,11,218,30,14,-)
+%?Tl(repeat,5)<%?mm<%xd(qa)|%xd(qb)|%xd(qc)|%xd(qd)|%xd(qe)>>
+
+# Shuffle
+%xl(s,shuffle.bmp,0,0,2)
+%Vl(i,53,218,15,14,-)
+%?ps<%xd(sa)|%xd(sb)>
+%Vl(c,53,218,15,14,-)
+%?Tl(shuffle,5)<%?ps<%xd(sa)|%xd(sb)>>
+
+# Previous, Rewind
+%xl(f,fw_rw.bmp,0,0,4)
+%V(102,218,20,14,-)
+%?mp<|%xd(fa)|%xd(fa)|%xd(fa)|%xd(fb)|>
+
+# Play, Pause
+%xl(m,play.bmp,0,0,4)
+%V(154,218,14,14,-)
+%?mp<%xd(ma)|%xd(mb)|%xd(mc)|%xd(md)>
+
+# Next, Forward
+%V(198,218,20,14,-)
+%?mp<|%xd(fc)|%xd(fc)|%xd(fd)|%xd(fc)|>
+
+# Speaker
+%xl(y,speaker.bmp,0,0,15)
+%V(263,217,13,16,-)
+%?pL<%xd(ya)|%xd(yb)|%xd(yc)|%xd(yd)|%xd(ye)|%xd(yf)|%xd(yg)|%xd(yh)|%xd(yi)|%xd(yj)|%xd(yk)|%xd(yl)|%xd(ym)|%xd(yn)|%xd(yo)|%xd(yo)|%xd(yo)|>
+
+# Volumen
+%V(279,217,21,20,8)%Vf(EEEEEE)
+%ar%pv
+%V(301,221,17,11,6)%Vf(EEEEEE)
+%?if(%pv,<=, -100)<%ss(3,1,%pv)|dB>
+
+
+## Touchscreen Button Feedback
+%V(0,210,320,5,-)
+%?Tl(repeat, 0.1)<%dr(10,0,30,5,EEEEEE)|%dr(10,0,30,5,181818)>
+%?Tl(shuffle, 0.1)<%dr(46,0,30,5,EEEEEE)|%dr(46,0,30,5,181818)>
+%?Tl(rr, 0.1)<%dr(98,0,30,5,EEEEEE)|%dr(98,0,30,5,181818)>
+%?Tl(play, 0.1)<%dr(145,0,30,5,EEEEEE)|%dr(145,0,30,5,181818)>
+%?Tl(ff, 0.1)<%dr(192,0,30,5,EEEEEE)|%dr(192,0,30,5,181818)>
+

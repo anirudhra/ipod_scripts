@@ -1,0 +1,35 @@
+       ______          __                                      __
+      /\__  _\        /\ \__                                  /\ \
+      \/_/\ \/     ___\ \ ,_\    __   _ __   _____     ___    \_\ \
+         \ \ \   /' _ `\ \ \/  /'__`\/\`'__\/\ '__`\  / __`\  /'_` \
+          \_\ \__/\ \/\ \ \ \_/\  __/\ \ \/ \ \ \L\ \/\ \L\ \/\ \L\ \
+          /\_____\ \_\ \_\ \__\ \____\\ \_\  \ \ ,__/\ \____/\ \___,_\
+          \/_____/\/_/\/_/\/__/\/____/ \/_/   \ \ \/  \/___/  \/__,_ /
+                                               \ \_\
+                                                \/_/
+                                   ___
+                                 /'___`\
+    v.2.4                       /\_\ /\ \           by Christian Soffke
+    2024-05-21                  \/_/// /__                     CC-BY-SA
+                                   // /_\ \
+                                  /\______/
+                                  \/_____/
+
+
+     Changelog:
+
+     v.2.4 (2024-05-21):
+       - Update backdrop
+
+     v.2.3 (2024-05-21):
+       - Improve visual alignment of album art placeholder image
+
+     v.2.2 (2024-05-21):
+       - Fix centering of Pause symbol
+
+     v.2.1 (2024-05-19):
+       - Show elapsed/remaining during and right after volume changes
+       - Adjust position of sleep timer string
+
+     v.2.0 (2024-05-18):
+       - Initial Release

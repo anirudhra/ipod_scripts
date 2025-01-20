@@ -1,0 +1,149 @@
+#__________________________________________
+#   
+#          -=# Ambiance (V1.0) #=-
+#
+#  For MP3 players of the resolution 220x176
+#  by Eduardo Rivas (jerivasmelgar(at)gmail.com)
+#
+#  Code based on Darkness
+#  by Luke Wagner AKA Doleo (lwagner5465(at)gmail.com)
+#  and Keep it Simple, Stupid! v2
+#  by Michael Huth (http://themes.rockbox.org/index.php?themeid=1119)
+#			
+#  All graphics are from the Ubuntu-mono-dark
+#  and Humanity iconsets, owned by Canonical Ltd.
+#
+#  [Last Modified on 12/29/2010]
+#__________________________________________
+#
+# This theme is released under the following license:
+# Creative Commons Attribution-Share Alike 3.0 Unported License
+# http://creativecommons.org/licenses/by-sa/3.0/
+#__________________________________________
+#
+#  Converted to 320x240 resolution by P Poorten
+#  October 2015
+#  Everything resized, slightly tweaked for different aspect ratio
+#
+#Disable Status Bar
+%wd
+#
+#BG and Images:
+#
+%X(ambiancewps.bmp)0%|0%|
+#
+%xl(a,playstatus.bmp,20,0,2)
+%xl(d,volume.bmp,0,0,4)
+%xl(e,shuffle.bmp,0,0)
+%xl(f,repeat.bmp,0,0,4)
+%xl(h,aaframe.bmp,0,0)
+%xl(i,battery.bmp,0,0,6)
+%xl(k,ff.bmp,42,6)
+%xl(l,rw.bmp,0,6)
+#
+#Tray icons:
+#
+%V(5,5,26,15,0)
+#Power
+%?bp<%?bc<%xd(if)%Vd(b)|%xd(if)%Vd(c)>|%Vd(a)%?bl<%xd(ia)|%xd(ia)|%xd(ib)|%xd(ic)|%xd(id)|%xd(ie)>>
+#Battery %
+%V(40,7,50,20,0)
+%bl
+#If to show volume icon or text
+%V(192,0,50,20,0)
+%?mv(0.5)<%Vd(t)|%Vd(u)%?pv<%xd(da)|%xd(db)|%xd(db)|%xd(dc)|%xd(dc)|%xd(dd)|%xd(dd)>>
+#Volume text
+%Vl(t,192,7,50,20,0)
+%pv
+#volume overlapping progress bar - added by P Poorten
+%Vl(t,14,192,290,17,-)%Vf(babdb6)%Vb(cccccc)
+%pv(0,0,290,17,vol.bmp)
+#Date
+%V(227,7,50,10,0)%Vf(CCCCCC)
+%cb %cd
+#Real Time Clock
+%V(268,7,50,10,0)%Vf(CCCCCC)
+%?cc<%?cf<%ac%cH:%cM:%cS|%al%cl:%cM %cP>|Clock needs setting!>
+#
+#Progress Bar:
+#
+%Vl(u,14,192,290,17,-)
+%pb(0,0,290,17,pbfull.bmp)
+#
+#Play/Pause/FF/RW:
+#
+%V(127,210,61,25,-)
+%?mp<%xd(ab)|%xd(a)|%xd(ab)|%xd(a)%xd(k)|%xd(a)%xd(l)|>
+#
+#Shuffle & Repeat:
+#
+%V(99,214,27,18,-)
+%?ps<%xd(e)>
+%V(196,213,21,25,-)
+%?mm<|%xd(fa)|%xd(fb)|%xd(fc)|%xd(fd)>
+#
+#Album art and song info:
+#
+%V(10,32,-,150,-)
+%Cl(1,1,140,140)
+%?C<%Cd%xd(h)%Vd(d)|%Vd(e)>
+#
+#Titles with album art:
+#
+#Track:
+%Vl(d,167,47,133,16,1)%Vf(383838) 
+%ac%s%?it<%it|%fn  [NO TAG]>
+#
+#Artist:
+%Vl(d,167,64,133,16,1)%Vf(383838) 
+%ac%s%?ia<%ia|%?iA<%iA|%?d(2)<%d(2) [NO TAG]|[NO TAG]>>>
+#
+#Album:
+%Vl(d,167,81,133,16,1)%Vf(383838) 
+%ac%s%?id<%id|%?d(1)<%d(1) [NO TAG]|[NO TAG]>>
+#
+#Genre:
+%Vl(d,167,98,133,16,1)%Vf(383838)
+%t(3)%ac%?ig<%ig|%Sx(Genre) %Sx(Unknown)>
+#
+#Playlist position and name:
+%Vl(d,167,115,133,32,1)%Vf(383838)
+%ac%s%pp/%pe
+%ac%s%?pn<"%pn">
+#bit rate
+%Vl(d,167,149,133,16,1)%Vf(383838)
+%ac%fb kbs %?fv<vbr|cbr>
+#
+#Titles without album art:
+#
+#Track:
+%Vl(e,0,47,-,16,1)%Vf(383838) 
+%ac%s%?it<%it|%fn  [NO TAG]>
+#
+#Artist:
+%Vl(e,0,64,-,16,1)%Vf(383838) 
+%ac%s%?ia<%ia|%?iA<%iA|%?d(2)<%d(2) [NO TAG]|[NO TAG]>>>
+#
+#Album:
+%Vl(e,0,81,-,16,1)%Vf(383838) 
+%ac%s%?id<%id|%?d(1)<%d(1) [NO TAG]|[NO TAG]>>
+
+#Genre:
+%Vl(e,0,98,-,16,1)%Vf(383838)
+%t(3)%ac%?ig<%ig|%Sx(Genre) %Sx(Unknown)>
+#
+#Playlist position and name:
+%Vl(e,0,115,-,32,1)%Vf(383838)
+%ac%s%pp/%pe
+%ac%s%?pn<%pn>
+#bit rate
+%Vl(e,0,149,-,16,1)%Vf(383838)
+%ac%fb kbs %?fv<vbr|cbr>
+#
+#All titles:
+#
+#Time:
+%V(6,215,32,16,1)%Vf(383838) 
+%al%pc 
+%V(260,215,54,16,1)%Vf(383838)
+%ar%pt

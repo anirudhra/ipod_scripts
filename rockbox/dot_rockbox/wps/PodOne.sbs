@@ -1,0 +1,52 @@
+# Theme by Guillaume Cocatre-Zilgien <gcocatre@gmail.com>
+# CC-BY-SA
+
+# Disable Status Bar
+%wd
+
+# Clear Backdrop
+%X(d)
+
+# Preload Font
+%Fl(2,14-Nimbus.fnt)
+
+# Preload Images
+%xl(battery,battery.bmp,0,0,5)
+%xl(playmodes,playmodes.bmp,0,0,9)
+
+# Display Viewports
+%?if(%mp, =, 1)<%?if(%bc, =, c)<%Vd(usb)|%?if(%bp, =, p)<%Vd(usb)|%Vd(playbackmode)>>|%Vd(playbackmode)>
+%?if(%Lt, =, themes)<%Vd(themetitle)|%Vd(title)>
+%?if(%St(battery display), =, numeric)<%Vd(batteryn)|%?if(%bc, =, c)<%Vd(batteryn)|%?if(%bp, =, p)<%Vd(batteryn)|%Vd(batteryg)>>>
+%Vd(topbar)
+
+# Playback Mode Icons
+%Vl(playbackmode,6,6,13,13,-)
+%xd(playmodes,%mp)
+
+# USB
+%Vl(usb,6,7,34,14,2)
+%alUSB
+
+# Menu Title
+%Vl(title,40,3,240,19,-)
+%ac%?if(%mh, =, h)<[ |>%?if(%lh, =, h)<…|>%?Lt<%?if(%Lt, =, Rockbox)<iPod|%Lt>|iPod>%?if(%lh, =, h)<…|>%?if(%mh, =, h)< ]|>
+
+# Theme Menu Title
+%Vl(themetitle,40,3,240,19,-)
+%ac%?if(%mh, =, h)<[ |>%?if(%lh, =, h)<…|>PodOne r75%?if(%lh, =, h)<…|>%?if(%mh, =, h)< ]|>
+
+# Battery (graphical)
+%Vl(batteryg,289,6,25,13,-)
+%?if(%bl, >, 88)<%xd(battery,5)|%?if(%bl, >, 63)<%xd(battery,4)|%?if(%bl, >, 38)<%xd(battery,3)|%?if(%bl, >, 13)<%xd(battery,2)|%xd(battery,1)>>>>
+
+# Battery (numerical)
+%Vl(batteryn,280,7,34,14,2)
+%ar%bl%%
+
+# Top Bar Separator Line
+%Vl(topbar,0,25,320,2,-)
+%dr(0,0,320,2)
+
+# Menu
+%Vi(-,0,29,320,209,-)

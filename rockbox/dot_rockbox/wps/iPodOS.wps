@@ -1,0 +1,139 @@
+//////////////////////////////////////////////////////
+/						     /
+/		    iPodOS Theme		     /
+/		  Made by @churbum		     /
+/						     /
+/	Credit goes to @1000kilobytes for the	     /
+/        concept this theme was based off of	     /
+/			- & -			     /
+/		    Ciprian Dragu		     /
+/	 for parts of the code from his theme        /
+/		   (iPod reFresh)		     /
+/						     /
+/						     /
+//////////////////////////////////////////////////////
+
+# WPS File
+#
+#-- Hide The Status Bar
+%wd
+#
+#-- Load Backdrop
+%X(backdrop-wps.bmp)
+#
+#-- Preload Fonts
+%Fl(5,14-SF-Pro-Rounded-Semibold.fnt)
+%Fl(6,15-SF-Pro-Text-Semibold.fnt)
+%Fl(7,16-SF-Pro-Text-Medium.fnt)
+%Fl(8,24-SF-Pro-Text-Semibold.fnt)
+#
+#-- Preload Images
+%xl(B,disk.bmp,0,0,6)
+%xl(C,pb.bmp,0,0)
+%xl(D,pb_back.bmp,0,0)
+%xl(E,battery.bmp,0,0,7)
+%xl(G,volume.bmp,0,0,21)
+%xl(H,status.bmp,0,0,4)
+%xl(M,shuffle.bmp,0,0)
+%xl(N,repeat.bmp,0,0,4)
+%xl(O,hold.bmp,0,0)
+%xl(P,lossless.bmp,0,0)
+%xl(w,cornerTL.bmp,0,0)
+%xl(x,cornerTR.bmp,107,0)
+%xl(y,cornerBL.bmp,0,107)
+%xl(z,cornerBR.bmp,107,107)
+#
+##############
+# STATUS BAR #
+##############
+#
+#-- Status icons
+%V(12,213,23,14,-)%Vf(ffffff)%Vb(F4F4F4)
+%?mp<|%xd(Ha)|%xd(Hb)|%xd(Hc)|%xd(Hd)||||>
+#
+#-- Disk working
+%V(30,8,16,16,-)
+%?lh<%t(0.1)%xd(Ba);%t(0.1)%xd(Bb);%t(0.1)%xd(Bc);%t(0.1)%xd(Bd);%t(0.1)%xd(Be);%t(0.1)%xd(Bf)>
+#
+#-- Hold icon
+%V(52,8,13,15,-)%Vf(ffffff)%Vb(F4F4F4)
+%?mh<%xd(O)|%?mr<%xd(O)>>
+#
+#-- Time
+%V(14,7,50,18,6)%Vf(ffffff)%Vb(F4F4F4)
+%?cf<%ck:%cM|%cl:%cM %cP>
+%s%al%?pS(15)<%ck:%cM|%cl:%cM %cP>
+#
+#-- Status
+%V(70,7,120,16,6)%Vf(cbcecc)%Vb(F4F4F4)
+#%al%cb %ce%, %?cf<%ck:%cM|%cl:%cM %cP>
+%s%al%?pS(9999999999999999999999999999999999999999)<Music|%?cf<%ck:%cM|%cl:%cM %cP>>
+#
+#-- Battery percentage
+%V(244,7,32,16,6)%Vf(ffffff)%Vb(F4F4F4)
+%ar%bl%%
+#
+# Battery
+%V(280,9,25,11,-)
+%?bp<%?bc<%xd(Ea)|%xd(Eb)>|%?bl<|%xd(Ef)|%xd(Ee)|%xd(Ed)|%xd(Ec)|%xd(Ec)>>
+#
+###########
+# CONTENT #
+###########
+#
+#-- Album art
+%Cl(0,0,111,111)
+# Album Art
+%V(14,29,111,111,-)
+#%?C<%Cd>
+#
+#-- Album art round corners
+%?mh<%Cd%?C<%xd(w)%xd(x)%xd(y)%xd(z)|>|%Cd%?C<%xd(w)%xd(x)%xd(y)%xd(z)|>> #refresh art on Hold
+#
+#-- Title
+%V(140,52,144,160,8)%Vf(ffffff)
+%al%s%?it<%s%it|%fn>
+#
+#-- Artist
+%V(140,80,144,130,7)%Vf(ffffff)
+%al%s%?ia<%ia|%?d(2)<%d(2)|%Sx(Artist)>>
+#
+#-- Album
+%V(140,102,144,130,7)%Vf(ffffff)
+%al%s%?id<%id|%?d(2)<%d(2)|%Sx(Artist)>>
+#
+#-- Lossless
+# determine if 'lossless', aiff=4, wave=5, flac=7, alac=11, shorten=13
+%?or(%if(%fc, =, 4),%if(%fc, =, 5),%if(%fc, =, 7),%if(%fc, =, 11),%if(%fc, =, 13))<%Vd(lossless)>
+#-- Lossless Indicator Image
+%Vl(lossless,14,156,65,11,-)
+%Vb(fffffff)
+%xd(P)
+#
+#
+#
+#-- Progress Bar
+# With a little hacking to make border look nice
+%V(13,198,305,5,0)
+%pb(0,0,294,5,D,backdrop,C)
+#
+#-- Song Current Time
+%V(13,174,57,16,5)%Vf(d1d4db)
+%al%pc
+#
+#-- Song Remaining Time
+%V(249,174,57,16,5)%Vf(cecec7)
+%ar-%pr
+#
+#-- Volume
+%V(77,203,165,37,-)
+%?mv(1.0)<%?pv<%xd(Ga)|%xd(Gb)|%xd(Gc)|%xd(Gd)|%xd(Ge)|%xd(Gf)|%xd(Gg)|%xd(Gh)|%xd(Gi)|%xd(Gj)|%xd(Gk)|%xd(Gl)|%xd(Gm)|%xd(Gn)|%xd(Go)|%xd(Gp)|%xd(Gq)|%xd(Gr)|%xd(Gs)|%xd(Gt)|%xd(Gu)>>
+#
+#-- Repeat
+%V(283,207,24,24,-)
+%?mm<|%xd(Na)|%xd(Nb)|%xd(Nc)|%xd(Nd)>
+#
+#-- Shuffle
+%V(249,207,24,24,-)
+%?ps<%xd(Ma)>
+#

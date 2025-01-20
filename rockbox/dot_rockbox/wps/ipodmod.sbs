@@ -1,0 +1,68 @@
+#Theme:ipodmod
+#Version:1.0
+#Device:ipod classic
+#Adapted by: Shiyu Zheng
+#License: CC-BY-SA
+#Original Script from Jason Pinto's Apl Inspirat Version 1.5
+
+# THEME       : Apl Inspirat
+# Version     : 1.5
+# TARGET(S)   : Apple iPod Nano 1G/2G
+# AUTHOR      : Jason Pinto - Contact: (JasonPinto@Live.com)
+#             : JasonRare (Forum Name)
+# LICENSE     : CC-BY-SA
+# COPYRIGHT   : ©Jason Pinto (2011)
+
+#-- Status Bar Disabler
+%wd
+#
+#-- Title Bar Disabler
+%?Lt<|>
+#
+#-- Backdrop
+%X(Backdrop - SBS.bmp) 
+#
+#-- PreLoad Fonts
+%Fl(3,20-Ubuntu-M.fnt)
+%Fl(4,14-Ubuntu-M.fnt)
+#
+#-- Preloaded Images
+%xl(A,battery.bmp,0,0,24)
+%xl(B,Disk Access Icons.bmp,0,0,6)
+%xl(C,Hold Icon - SBS.bmp,0,0)
+%xl(D,Play & Pause Icons3 - SBS.bmp,0,0,2)
+#
+#-- Date Bar
+%V(100,4,120,14,4)%Vf(000000)%Vb(F4F4F4)
+%ac%cb %ce, %?cf<%cH:%cM|%cl:%cM>%cP
+#
+#-- Disk Access/Play & Pause Icons Handler
+#%?lh<%Vd(a)|%Vd(b)>
+#
+#-- Disk Access Icons
+%V(2,3,14,14,-)%Vf(000000)%Vb(F4F4F4)
+%?lh<%t(0.1)%xd(Ba);%t(0.1)%xd(Bb);%t(0.1)%xd(Bc);%t(0.1)%xd(Bd);%t(0.1)%xd(Be);%t(0.1)%xd(Bf)|>
+#
+#-- Hold Icon
+%V(257,5,7,10,-)%Vf(000000)%Vb(F4F4F4)
+%?mh<%xd(C)|%?mr<%xd(C)>>
+#
+#-- Shuffle
+%xl(K,Shuffle Icon - SBS.bmp,0,0)
+%V(18,5,14,12,1)
+%?ps<%xd(K)>
+#
+%xl(J,Playback Icons - SBS.bmp,0,0,4)
+%V(36,5,14,12,1)
+%?mm<|%xd(Ja)|%xd(Jb)|%xd(Jc)|%xd(Jd)>
+#
+#-- Play & Pause Icons
+%V(275,4,16,17,-)%Vf(000000)%Vb(F4F4F4)
+%?mp<|%xd(Da)|%xd(Db)||||||>
+#
+#-- Battery Icons
+%V(294,5,19,10,-)%Vf(000000)%Vb(F4F4F4)
+%?bp<%?bc<%t(1.0)%xd(Aa);%t(1.0)%xd(Ab)|%xd(Ac)>|%?bl<%xd(Ad)|%xd(Ad)|%xd(Ae)|%xd(Af)|%xd(Ag)|%xd(Ah)|%xd(Ai)|%xd(Aj)|%xd(Ak)|%xd(Al)|%xd(Am)|%xd(An)|%xd(Ao)|%xd(Ap)|%xd(Aq)|%xd(Ar)|%xd(As)|%xd(At)|%xd(Au)|%xd(Av)|%xd(Aw)|%xd(Ax)>>#
+#
+#-- UI Viewport
+%Vi(-,0,21,320,219,3)%Vf(000000)%Vb(F4F4F4)

@@ -1,0 +1,63 @@
+﻿# ===========================================================
+# GreyT4
+# Design and concept by jeanreno
+# Coding by Chrimson
+# Modified by E.Halpin 2/27/2024
+# ===========================================================
+# Released to the Public Domain February 25th 2006
+# Distribute and modify as you see fit, all I ask
+# is that you keep this credit in place. Thanks. :)
+#
+# Adapted from ipod photo/colour to ipod video/classic
+# P Poorten August 2015
+# Still public domain!
+# improved playmode icons Jan 2019
+# improved volume slider Jan 2019
+# restored, and remade and improved, battery indicator.  For some reason the original version included bitmaps but the relevant line was commented out.  Not sure why.  Decided to put it back.
+#
+
+%wd
+%X(sbsbg.bmp)
+#%xl(A,playnewnew.bmp,15,12)
+#%xl(B,pausenewnew.bmp,15,12)
+#%xl(C,forwardnewnew.bmp,15,12)
+#%xl(D,backwardnewnew.bmp,15,12)
+%xl(M,batt.bmp,256,10,8)
+#%xl(S,shuff0.bmp,37,210)
+#%xl(T,shuff1.bmp,37,210)
+#%xl(U,holdon.bmp,15,12)
+#%xl(V,holdoff.bmp,15,12)
+#%x(W,clock.bmp,15,12)
+#%xl(X,diskon.bmp,70,210)
+#%xl(Y,diskoff.bmp,70,210)
+%xl(G,volx.bmp,0,0)
+
+%Fl(2,19-Inter-V-padded.fnt)
+%Fl(3,16-Inter-SemiBold.fnt)
+
+#%?mp<|%xd(A)|%xd(B)|%xd(C)|%xd(D)>
+#%?pv<%xd(F)|%xd(F)|%xd(G)|%xd(G)|%xd(H)|%xd(I)|%xd(J)|%xd(K)|%xd(L)|%xd(L)>
+%t(0.5)%?bp<%?bc<%xd(Mg)|%xd(Mh)>|%?bl<%xd(Mg)|%xd(Mf)|%xd(Me)|%xd(Md)|%xd(Mc)|%xd(Mb)|%xd(Ma)>>;%t(0.5)%?bp<%?bc<%xd(Mf)|%xd(Mh)>|%?bl<%xd(Mg)|%xd(Mf)|%xd(Me)|%xd(Md)|%xd(Mc)|%xd(Mb)|%xd(Ma)>>;%t(0.5)%?bp<%?bc<%xd(Me)|%xd(Mh)>|%?bl<%xd(Mg)|%xd(Mf)|%xd(Me)|%xd(Md)|%xd(Mc)|%xd(Mb)|%xd(Ma)>>;%t(0.5)%?bp<%?bc<%xd(Md)|%xd(Mh)>|%?bl<%xd(Mg)|%xd(Mf)|%xd(Me)|%xd(Md)|%xd(Mc)|%xd(Mb)|%xd(Ma)>>;%t(0.5)%?bp<%?bc<%xd(Mc)|%xd(Mh)>|%?bl<%xd(Mg)|%xd(Mf)|%xd(Me)|%xd(Md)|%xd(Mc)|%xd(Mb)|%xd(Ma)>>;%t(0.5)%?bp<%?bc<%xd(Mb)|%xd(Mh)>|%?bl<%xd(Mg)|%xd(Mf)|%xd(Me)|%xd(Md)|%xd(Mc)|%xd(Mb)|%xd(Ma)>>;%t(0.5)%?bp<%?bc<%xd(Ma)|%xd(Mh)>|%?bl<%xd(Mg)|%xd(Mf)|%xd(Me)|%xd(Md)|%xd(Mc)|%xd(Mb)|%xd(Ma)>>;
+#%?ps<%xd(T)|%xd(S)>
+#%?mh<%?mr<%xd(U)|%xd(U)>|%?mr<%xd(U)|%xd(V)>>
+#%?lh<%xd(X)|%xd(Y)>
+
+%V(265,216,43,16,3)%Vf(7f7f7f)
+%ar%?cf<%cH:%cM|%ck:%cM %cp>
+
+%V(184,211,28,-,2)%Vf(7f7f7f)
+%ar%pv
+
+%V(10,216,70,16,3)%Vf(7f7f7f)
+%al%pp of %pe 
+
+# pp - make volume a simple bar not a discrete image series
+%V(104,212,62,22,-)
+%pv(0,0,62,22,G)
+
+%xl(Q,rbtitle.bmp,0,3)
+
+%V(12,6,215,22,-)
+%?if(%cs, !=, 1)<%Lt|%xd(Q)>
+
+%Vi(-,18,38,284,157,2)%Vf(7f7f7f)

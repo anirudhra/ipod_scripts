@@ -1,0 +1,234 @@
+# ┌─────────────────────────────────────────────────────────────────────────┐
+# │         _______________________________________________________         │
+# │           _      _                                                      │
+# │           |  |  /    ,       /               ,         /                │
+# │         --|-/|-/---------__-/----__----__--------__---/__--_/_-         │
+# │           |/ |/    /   /   /   /___) /   ) /   /   ) /   ) /            │
+# │         __/__|____/___(___/___(___ _/___/_/___(___/_/___/_(_ __         │
+# │                                                  /                      │
+# │                                                                         │
+# │                              Rockbox Theme                              │
+# │   Rev. 11                                         by Christian Soffke   │
+# │   2024-03-24                                                 CC-BY-SA   │
+# │                                                                         │
+# └─────────────────────────────────────────────────────────────────────────┘
+#
+#
+#	Disable status bar
+%wd
+#
+#	Load needed fonts
+%Fl(3,15-Inter-Bold.fnt)
+%Fl(8,20-Inter-SemiBold.fnt)
+%Fl(9,20-Inter-V.fnt)
+#
+#	Preload icons
+%xl(P,playerStatus.bmp,0,0,4)
+%xl(B,batteryStatus.bmp,0,0,10)
+%xl(R,repeat.bmp,20,0)
+%xl(X,repeatOne.bmp,5,0)
+%xl(Y,repeatShuffle.bmp,5,0)
+%xl(Z,repeatAB.bmp,1,0)
+%xl(S,shuffle.bmp,42,0)
+%xl(vb_backdrop,vb_backdrop.bmp,0,0)
+%xl(speaker_loud,speaker_loud.bmp,92,1)
+%xl(speaker_too_loud,speaker_too_loud.bmp,117,1)
+%xl(pb_playing_backdrop,pb_playing_backdrop.bmp,0,0)
+%xl(pb_paused_backdrop,pb_paused_backdrop.bmp,0,0)
+#
+#
+# ---------
+# Logic:
+# ---------
+#
+#	Display frame and overlay, when paused
+%?if(%mp,=,3)<%Vd(paused)%?mh<|%Vd(unlocked_paused)>|%Vd(playing)>
+#
+#	Display lock icon
+%?mh<%Vd(locked)>
+#
+# 	Sleep Timer
+%?bs<%Vd(sleeptimer)>
+#
+# 	Single Mode setting only available in dev builds at this point.
+#%?or(%if(%St(single mode),!=,off),%if(%St(party mode),!=,off))<%Vd(mode)>
+#
+#	Display battery percentage, unless setting is disabled
+%?if(%St(battery display), =,numeric)<%Vd(batterytext)%Vd(track_short)|%Vd(track_long)>
+#
+# 	Display volume bar and progress while adjusting volume
+#   Display elasped/remaining while ff/rew buttons pressed
+#   Display Shuffle/Repeat, if active, and adjust length of artist string
+%?mv(2.5)<%Vd(volumebar)%Vd(pl_remaining)|%?if(%mp,>=,4)<%Vd(elapsed_remaining)|%?or(%if(%mm, >,1),%if(%ps, =, s))<%Vd(artist_short)%Vd(repeat_shuffle)|%Vd(artist_long)>>>
+#
+#
+# ---------
+# Background Viewports:
+# ---------
+# 	Album Art
+%V(0,0,320,240,-)%VB
+%Vf(FFFFFF)
+%Vb(151515)
+%?C<|%x(AlbumPlaceholder,albumPlaceholder.bmp,0,0)>
+%Cl(0,0,320,320,c,t)
+%?C<%Cd>
+#
+%Vl(sleeptimer,250,7,70,15,-)%VB
+%x(SleeptimerBg,sleep_tab.bmp,0,0)
+#
+#%Vl(mode,18,7,100,15,-)%VB
+#%x(ModeBg,singlemode_tab.bmp,0,0)
+#
+# Track Info "window" background:
+#
+%V(18,181,-18,-10,-)%VB
+%Vb(080808)
+#
+%V(0,0,-,-,-)
+#
+# ----------------------------------------------
+# --------  Track Info Window Frame   ----------
+# ----------------------------------------------
+#
+# PLAYING ---->
+#
+%Vl(playing,0,-76,320,18,-)
+%x(top,top.bmp,0,0)
+#
+%Vl(playing,0,-58,18,48,-)
+%x(left,left.bmp,0,0)
+#
+%Vl(playing,-18,-58,-,48,-)
+%x(right,right.bmp,0,0)
+#
+%Vl(playing,0,-10,-,-,-)
+%x(bottom,bottom.bmp,0,0)
+#
+# PAUSED ----->
+#
+%Vl(paused,0,0,-,-58,-)
+%x(top_paused,top_paused.bmp,0,0)
+#
+%Vl(paused,0,-58,18,48,-)
+%x(left_paused,left_paused.bmp,0,0)
+#
+%Vl(paused,-18,-58,-,48,-)
+%x(right_paused,right_paused.bmp,0,0)
+#
+%Vl(paused,0,-10,-,-,-)
+%x(bottom_paused,bottom_paused.bmp,0,0)
+#
+#
+# ----------------------------------------------
+# ---------------  Status Indicators  ----------
+# ----------------------------------------------
+#
+#	Battery percentage
+%Vl(batterytext,-87,-52,38,15,3)
+%Vf(FFFFFF)
+%Vb(080808)
+ %?if(%bl, =, 100)<CGD|%bl %%>
+#
+#
+# 	Battery Icon
+%V(-49,-53,27,20,3)
+%Vf(FFFFFF)
+%?bp<%?bl<%xd(Ba)|%xd(Ba)|%xd(Ba)|%xd(Bb)|%xd(Bb)|%xd(Bb)|%xd(Bb)|%xd(Bc)|%xd(Bc)|%xd(Bc)|%xd(Bc)|%xd(Bc)|%xd(Bc)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Be)|%xd(Be)>|%?bl<%xd(Bf)|%xd(Bf)|%xd(Bf)|%xd(Bg)|%xd(Bg)|%xd(Bg)|%xd(Bg)|%xd(Bh)|%xd(Bh)|%xd(Bh)|%xd(Bh)|%xd(Bh)|%xd(Bh)|%xd(Bi)|%xd(Bi)|%xd(Bi)|%xd(Bi)|%xd(Bi)|%xd(Bi)|%xd(Bi)|%xd(Bj)|%xd(Bj)>>
+#
+# 	Repeat Mode and Shuffle indicators
+%Vl(repeat_shuffle,-83,-27,-20,12,-)
+%?mm<|%xd(Ra)|%xd(Ra)%xd(X)|%xd(Ra)%xd(Y)|%xd(Ra)%xd(Z)>
+%?if(%ps, =, s)<%xd(S)|>
+#
+#
+# Lock Icon
+%Vl(locked,0,7,19,15,-)
+%Vb(080808)
+%x(lock,lock_wps.bmp,0,0)
+#
+%Vl(unlocked_paused,0,7,19,15,-)
+%Vb(080808)
+%x(unlocked_paused,unlocked_paused.bmp,0,0)
+#
+# 	RB version no older than December 12, 2021 required for Single Mode.
+#	Party and Single Mode
+#%Vl(mode,18,6,100,16,3)
+#%Vf(6f6f6f)
+#%Vb(0E0E0E)
+#%ac%?if(%St(party mode),!=,off)<party mode|%St(single mode)>
+#
+#	Sleep Timer
+%Vl(sleeptimer,250,6,70,16,3)
+%Vf(6f6f6f)
+%Vb(0E0E0E)
+%ac%bs
+#
+# ----------------------------------------------
+# ---------------  Track Info  -----------------
+# ----------------------------------------------
+#
+#	Current Track or filename  ----- if battery percentage is displayed
+%Vl(track_short,22,-55,-90,22,8)
+%Vf(FFFFFF)
+%Vb(080808)
+%s%al%?it<%it|%fn>
+#
+#
+#	Current Track or filename ------ otherwise
+%Vl(track_long,22,-55,-53,22,8)
+%Vf(FFFFFF)
+%Vb(080808)
+%s%al%?it<%it|%fn>
+#
+#	Current Artist ----- if Shuffle or Repeat Mode active
+%Vl(artist_short,22,-33,-90,22,9)
+%Vf(ff004a)
+%Vb(080808)
+%al%s%?ia<%t(5)%?if(%ig,=,Classical)<%?ic<By %ic - >%ia|%ia>|%?it<%fn>>;%s%?id<%t(5)%id|%t(0)>
+#
+#	Current Artist ----- otherwise
+%Vl(artist_long,22,-33,-22,22,9)
+%Vf(ff004a)
+%Vb(080808)
+%al%s%?ia<%t(5)%?if(%ig,=,Classical)<%?ic<By %ic - >%ia|%ia>|%?it<%fn>>;%s%?id<%t(5)%id|%t(0)>
+#
+#	Progress Bar (Playing)
+%Vl(playing,15,-10,291,2,-)
+%pb(0,0,-,2,image,pb_playing.bmp, backdrop, pb_playing_backdrop)
+#
+#	Progress Bar (Paused)
+%Vl(paused,15,-10,291,2,-)
+%pb(0,0,-,2,image,pb_paused.bmp, backdrop, pb_paused_backdrop)
+#
+#	Playlist Progress / Time Remaining
+%Vl(pl_remaining,22,-29,-150,-10,3)
+%Vf(ff004a)
+%Vb(080808)
+%s%al%pp/%pe  -%pr
+#
+# --------------------------------------------------
+# - Elapsed/Remaining While FFW-ing/Rewinding ------
+# --------------------------------------------------
+#
+#
+%Vl(elapsed_remaining,22,-29,100,15,3)
+%Vf(ff004a)
+%Vb(080808)
+%s%al%pc
+#
+%Vl(elapsed_remaining,120,-29,-22,15,3)
+%Vf(ff004a)
+%Vb(080808)
+%s%ar-%pr
+#
+#
+# --------------------------------------
+# ----------   Volume Bar   ------------
+# --------------------------------------
+#
+#
+%Vl(volumebar,178,-31,-18,18,-)
+%pv(0,6,84,9,vb.bmp,backdrop,vb_backdrop)
+%xd(speaker_loud)
+%?if(%pv, >, 0)<%xd(speaker_too_loud)>
+#
