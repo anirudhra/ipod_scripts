@@ -10,7 +10,7 @@ ituneslibraryxml="$basedir/Library.xml"
 ipodplaylistsdir="${basedir}/ipod_itunes_playlists"
 ipodplaylistsbackupdir="${ipodplaylistsdir}_bak"
 localpathstring="file:///Users/anirudh/Music/MusicLibrary"
-nasabspathstring="/mnt/ssd-media/media/music"
+#nasabspathstring="/mnt/pve-sata-ssd/ssd-media/media/music"
 # use relative path instead of absolute
 naspathstring=".."
 ipodpathstring="/Music"
@@ -70,3 +70,7 @@ mv "${ipodplaylistsdir}/Library.m3u" "${ipodplaylistsdir}/Full Library.m3u"
 # copy to playlists directory that's automatically sync'd with nas
 # this playlist contains path that is relative to music direcotry instead of absolute
 cp -r "${nasplaylistsdir}"/* "${nassync_playlistsdir}"
+
+echo
+echo All Done!
+echo
