@@ -57,12 +57,14 @@ cd -
 
 # cleanup playlists
 rm "${nasplaylistsdir}/Tones.m3u"
+rm "${nasplaylistsdir}/Music.m3u"
 rm "${nasplaylistsdir}/Downloaded.m3u"
 rm "${nasplaylistsdir}/Dead Tracks.m3u"
 mv "${nasplaylistsdir}/Library.m3u" "${nasplaylistsdir}/Full Library.m3u"
 
 # cleanup ipod playlists, can't copy from nas playlists directory because paths are different
 rm "${ipodplaylistsdir}/Tones.m3u"
+rm "${ipodplaylistsdir}/Music.m3u"
 rm "${ipodplaylistsdir}/Downloaded.m3u"
 rm "${ipodplaylistsdir}/Dead Tracks.m3u"
 mv "${ipodplaylistsdir}/Library.m3u" "${ipodplaylistsdir}/Full Library.m3u"
