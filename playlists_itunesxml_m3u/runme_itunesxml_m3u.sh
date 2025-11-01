@@ -3,6 +3,9 @@
 # Script to generate M3U playlists from iTunes Library XML file
 #
 
+# global defaults
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 usage() {
   echo "Usage: $0 [options]"
   echo "Options:"
@@ -44,12 +47,9 @@ do_path_replace_and_cleanup() {
 }
 
 # Detect OS-specific information and ensure the itunesexport binary is ready
-detect_and_prepare_os_info() {
-  local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-  local music_base="${HOME}/Music"
+detect_itunesexport_bin() {
+  # Return path to platform-specific itunesexport binary located next to script
   local bin="${script_dir}/itunesexport_linux"
-
-  # Centralized OS detection
   case "$(uname -s)" in
     Darwin)
       bin="${script_dir}/itunesexport_macos"
@@ -62,27 +62,11 @@ detect_and_prepare_os_info() {
       exit 1
       ;;
     *)
-      # Default to linux-style behavior for other Unix-like systems
       bin="${script_dir}/itunesexport_linux"
       ;;
   esac
 
-  # Verify the binary exists
-  if [ ! -f "${bin}" ]; then
-    echo "Error: itunesexport binary not found: ${bin}" >&2
-    exit 1
-  fi
-
-  # Ensure the binary is executable
-  if [ ! -x "${bin}" ]; then
-    chmod +x "${bin}" 2>/dev/null || {
-      echo "Error: itunesexport binary is not executable and chmod failed: ${bin}" >&2
-      exit 1
-    }
-  fi
-
-  echo "${music_base}"
-  echo "${bin}"
+  printf '%s\n' "${bin}"
 }
 
 # Detect iTunes media source path as a file:// URI.
@@ -133,10 +117,29 @@ detect_itunes_source_uri() {
   fi
 }
 
-# Default values (OS-specific)
-# Get music base and suggested itunesexport binary (and ensure it's ready)
-read -r music_base itunesexport_bin < <(detect_and_prepare_os_info)
+# default music base (moved into main defaults)
+music_base="${HOME}/Music"
+
+# Detect platform-specific itunesexport binary and validate
+itunesexport_bin="$(detect_itunesexport_bin)"
+if [ -z "${itunesexport_bin}" ]; then
+  echo "Error: itunesexport binary path is empty (detect_and_prepare_os_info failed)" >&2
+  exit 1
+fi
+if [ ! -f "${itunesexport_bin}" ]; then
+  echo "Error: itunesexport binary not found: ${itunesexport_bin}" >&2
+  exit 1
+fi
+if [ ! -x "${itunesexport_bin}" ]; then
+  chmod +x "${itunesexport_bin}" 2>/dev/null || {
+    echo "Error: itunesexport binary is not executable and chmod failed: ${itunesexport_bin}" >&2
+    exit 1
+  }
+fi
+
+# Set default values for options
 playlistsbasedir="${music_base}/Playlists"
+sourcepathstring="${music_base}/MusicLibrary"
 destinationpathstring=".."
 ituneslibraryxml=""
 backup_playlists=0
@@ -168,6 +171,8 @@ fi
 if [ -z "${sourcepathstring}" ]; then
   sourcepathstring=$(detect_itunes_source_uri)
 fi
+
+# Destination directories
 convertedplaylistsdir="${playlistsbasedir}/playlists"
 existingplaylistsbackupdir="${playlistsbasedir}/playlists_backup"
 
@@ -177,11 +182,16 @@ if [ ! -d "${playlistsbasedir}" ]; then
 fi
 
 # create temporary directory for export
-tempplaylistsdir=$(mktemp -d "${playlistsbasedir}/playlists.temp")
+tempplaylistsdir=$(mktemp -d "${playlistsbasedir}/playlists.temp.XXXXXX")
 trap "rm -rf ${tempplaylistsdir}" EXIT
 
 # export xml to m3u in temporary directory
-"${itunesexport_bin}" -library "${ituneslibraryxml}" -output "${tempplaylistsdir}" -includeAllWithBuiltin || {
+itunes_cmd=("${itunesexport_bin}" -library "${ituneslibraryxml}" -output "${tempplaylistsdir}" -includeAllWithBuiltin)
+
+# Print the command for debugging / dry-run visibility
+printf 'Running: ' && printf '%q ' "${itunes_cmd[@]}" && printf '\n'
+
+"${itunes_cmd[@]}" || {
   echo "Error: Failed to export playlists from iTunes Library XML using ${itunesexport_bin}"
   exit 1
 }
