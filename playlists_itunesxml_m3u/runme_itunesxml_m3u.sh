@@ -142,14 +142,13 @@ do_path_replace_and_cleanup() {
 
   # now replace paths in playlist files without changing cwd
   src_path_raw="${sourcepathstring:-}"
-
-  src_path_decoded=$(urldecode "$src_path_raw")
+  src_path_cleaned=$(echo "$src_path_raw" | sed -e 's#^file://localhost##' -e 's#^file://##')
 
   for fpath in "$playlistdir"/*.m3u; do
     [ -f "$fpath" ] || continue
     # Use perl for robust in-place replacement.
     # \Q...\E treats the content as literal, avoiding issues with special characters.
-    perl -i -pe "s#^.*\Q${src_path_decoded}\E#${dst_path}#g" "$fpath"
+    perl -i -pe "s#^.*\Q${src_path_cleaned}\E#${dst_path}#g" "$fpath"
   done
 }
 
