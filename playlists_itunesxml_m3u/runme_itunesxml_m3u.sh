@@ -141,8 +141,7 @@ do_path_replace_and_cleanup() {
   fi
 
   # now replace paths in playlist files without changing cwd
-  src_path_raw="${sourcepathstring:-}"
-  src_path_cleaned=$(echo "$src_path_raw" | sed -e 's#^file://localhost##' -e 's#^file://##' | sed -e 's#^/\([A-Za-z]\):/\1:/#')
+src_path_cleaned=$(echo "$src_path_raw" | sed -e 's#^file://localhost##' -e 's#^file://##' | sed -e 's#^/\([A-Za-z]\):#\1:#')
 
   for fpath in "$playlistdir"/*.m3u; do
     [ -f "$fpath" ] || continue
