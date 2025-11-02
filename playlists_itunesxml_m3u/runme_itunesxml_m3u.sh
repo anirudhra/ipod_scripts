@@ -70,48 +70,6 @@ detect_itunesexport_bin() {
   printf '%s\n' "${bin}"
 }
 
-# Function to detect iTunes media source path
-detect_itunes_source_uri() {
-  local xmlpath="${ituneslibraryxml}"
-  local result=""
-
-  if [ -n "${xmlpath}" ] && [ -f "${xmlpath}" ]; then
-    # Extract the <string> that follows <key>Music Folder</key>
-    raw=$(grep '<key>Music Folder</key>' "${xmlpath}" \
-      | sed -n 's:.*<string>\(.*\)</string>.*:\1:p' | tr -d '\r')
-
-    if [ -n "${raw}" ]; then
-      # If it's already a file:// URI, just ensure spaces are percent-encoded
-      if echo "${raw}" | grep -q '^file://'; then
-        result=$(echo "${raw}" | sed 's/ /%20/g')
-      else
-        # If it contains backslashes (Windows path), convert to URI
-        if echo "${raw}" | grep -q '\\\\'; then
-          winpath=$(echo "${raw}" | sed 's|\\\\|/|g')
-          winpath=$(echo "${winpath}" | sed 's|^\([A-Za-z]\):|/\1:|')
-          result=$(echo "file://${winpath}" | sed 's/ /%20/g')
-        else
-          # Otherwise assume a POSIX filesystem path
-          result=$(echo "file://${raw}" | sed 's/ /%20/g')
-        fi
-      fi
-    fi
-  fi
-
-  # Fallback heuristics if XML not present or key missing (Unix-like only).
-  if [ -z "${result}" ]; then
-    basepath="${music_base:-${HOME}/Music}"
-    if [ -d "${basepath}/MusicLibrary" ]; then
-      result="file://${basepath}/MusicLibrary"
-    else
-      itunes_path=$(echo "${basepath}/iTunes/iTunes Media/Music" | sed 's| |%20|g')
-      result="file://${itunes_path}"
-    fi
-  fi
-
-  echo "${result}"
-}
-
 # Function to replace paths and clean up playlists
 do_path_replace_and_cleanup() {
   playlistdir="$1"
@@ -141,20 +99,15 @@ do_path_replace_and_cleanup() {
   fi
 
   # now replace paths in playlist files without changing cwd
-src_path_cleaned=$(echo "$src_path_raw" | sed -e 's#^file://localhost##' -e 's#^file://##' | sed -e 's#^/\([A-Za-z]\):#\1:#')
-
   for fpath in "$playlistdir"/*.m3u; do
     [ -f "$fpath" ] || continue
     # Use perl for robust in-place replacement.
-    # \Q...\E treats the content as literal, avoiding issues with special characters.
-    perl -i -pe "s#^.*\Q${src_path_cleaned}\E#${dst_path}#g" "$fpath"
+    # This regex finds the beginning of the path and everything up to and
+    # including the last case-insensitive "music/" folder, and replaces it
+    # with the destination path. This is more robust than relying on parsing
+    # the iTunes XML file.
+    perl -i -pe "s#^.*/music/#${dst_path}#i" "$fpath"
   done
-}
-
-# Function to URL decode strings
-urldecode() {
-  # Use perl to URL decode the string
-  perl -pe 's/%([0-9a-fA-F]{2})/chr hex $1/ge' <<< "$1"
 }
 
 usage() {
@@ -162,7 +115,7 @@ usage() {
   echo "Options:"
   echo "  -p PLAYLISTSBASEDIR      Base directory for ituneslibraryxml, converted & backed up playlists (default: OS-dependent)"
   echo "  -l ITUNESLIBRARYXML      Path to iTunes Library XML file (default: \${PLAYLISTSBASEDIR}/library/Library.xml)"
-  echo "  -s SOURCEPATHSTRING      Source path string (default: OS-dependent)"
+
   echo "  -d DESTINATIONPATHSTRING Destination path string (default: ../music)"
   echo "  -b                       Backup existing playlists before generating new ones (disabled by default)"
   echo "  -f                       Force run even if playlists are up to date"
@@ -192,18 +145,16 @@ fi
 
 # Set default values for options
 playlistsbasedir="${music_base}/Playlists"
-sourcepathstring="" # do not set any defaults as there is an empty detection later
 destinationpathstring="../music/"
 ituneslibraryxml=""
 backup_playlists=0
 force_run=0
 cleanup_only=0
 
-while getopts "p:l:s:d:bfch" opt; do
+while getopts "p:l:d:bfch" opt; do
   case $opt in
     p) playlistsbasedir="$OPTARG" ;;
     l) ituneslibraryxml="$OPTARG" ;;
-    s) sourcepathstring="$OPTARG" ;;
     d) destinationpathstring="$OPTARG" ;;
     b) backup_playlists=1 ;;
     f) force_run=1 ;;
@@ -219,13 +170,6 @@ fi
 if [ ! -e "${ituneslibraryxml}" ]; then
   echo "No iTunes Library found in ${ituneslibraryxml}!"
   exit 1
-fi
-# If source path string wasn't provided on the command line, try to detect
-# it now from the itunes library XML (uses detect_itunes_source_uri which
-# uses the global ${ituneslibraryxml}). Place this immediately after
-# ${ituneslibraryxml} is finalized.
-if [ -z "${sourcepathstring}" ]; then
-  sourcepathstring=$(detect_itunes_source_uri)
 fi
 
 # Destination directories
@@ -284,12 +228,6 @@ if [ "$cleanup_only" -eq 0 ]; then
     exit 1
   }
 
-  # Count .m3u files copied to the converted playlists directory for the summary
-  m3u_count=0
-  if [ -d "${convertedplaylistsdir}" ]; then
-    # find returns zero even if no matches; wc -l will be 0 in that case
-    m3u_count=$(find "${convertedplaylistsdir}" -type f -name '*.m3u' | wc -l)
-  fi
 
   # Cleanup temporary directory after successful completion
   rm -rf "${tempplaylistsdir}"
@@ -301,10 +239,13 @@ else
     echo "Error: Failed to process playlists"
     exit 1
   }
-  m3u_count=0
-  if [ -d "${convertedplaylistsdir}" ]; then
-    m3u_count=$(find "${convertedplaylistsdir}" -type f -name '*.m3u' | wc -l)
-  fi
+fi
+
+# Count .m3u files for the summary
+m3u_count=0
+if [ -d "${convertedplaylistsdir}" ]; then
+  # find returns zero even if no matches; wc -l will be 0 in that case
+  m3u_count=$(find "${convertedplaylistsdir}" -type f -name '*.m3u' | wc -l)
 fi
 
 echo
@@ -321,7 +262,7 @@ if [ "$backup_playlists" -eq 1 ] && [ -d "${existingplaylistsbackupdir}" ]; then
 fi
 echo
 echo "Path strings modified in converted playlists:"
-echo "  - Source path: ${sourcepathstring}"
+
 echo "  - Destination path: ${destinationpathstring}"
 echo
 if [ "$cleanup_only" -eq 0 ]; then
